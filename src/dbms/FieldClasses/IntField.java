@@ -11,8 +11,36 @@ import java.nio.ByteBuffer;
  * @author starwalkerholiday
  */
 public class IntField extends Field {
-    private int data;
-    public ByteBuffer wrapData() {
-        return ByteBuffer.allocate(4).putInt(data);
+    
+    // datos que NO serán escritos en encabezado !!
+    private static final byte sub_fixed_size = 5;
+    
+    // datos escritos en encabezado !!
+    private int dft_data;
+
+    public IntField(String name, boolean opt, int data) {
+        super(name, opt);
+        
+        this.dft_data = data;
+        
+    }
+    
+    @Override
+    public byte getFieldType() {
+        return 00;
+    }
+    
+    @Override
+    public ByteBuffer[] wrapHeaderData() {
+        
+        ByteBuffer bb = ByteBuffer.allocate(sub_fixed_size);
+        bb.put(getFieldType());
+        bb.putInt(dft_data);
+        
+        return new ByteBuffer[]{
+                getGeneralData(),
+                bb
+        };
+        
     }
 }
