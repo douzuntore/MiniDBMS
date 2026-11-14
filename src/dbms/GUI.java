@@ -8,6 +8,7 @@ import dbms.FieldClasses.*;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +17,7 @@ import javax.swing.JFileChooser;
 public class GUI extends javax.swing.JFrame {
     
     private static final int version = 1;
+    static  File archivoActual =  new File("prueba.txt");
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUI.class.getName());
 
@@ -24,6 +26,9 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() {
         initComponents();
+       archivoActual = null;
+       ocultarPaneles();
+       actualizarBotones();
     }
 
     /**
@@ -35,62 +40,591 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        File_Chooser = new javax.swing.JFileChooser();
+        Fondo = new javax.swing.JPanel();
+        jpOpciones = new javax.swing.JPanel();
+        Dec = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btnCampos = new javax.swing.JToggleButton();
+        btnRegistros = new javax.swing.JToggleButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txtArchivoActual = new javax.swing.JTextField();
+        Menus = new javax.swing.JPanel();
+        jpCampos = new javax.swing.JPanel();
+        jpListar = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jListCamposActuales = new javax.swing.JList<>();
+        jtpCampos = new javax.swing.JTabbedPane();
+        jpCrearCampo = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        btnCrearCampo = new javax.swing.JButton();
+        txtCrearNombreCampo = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        cbxTipoCampo = new javax.swing.JComboBox<>();
+        jspCrearSizeCampo = new javax.swing.JSpinner();
+        jpModificarCampo = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        txtModificarNombreCampo = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        cbxModificarTipoCampo = new javax.swing.JComboBox<>();
+        jspModificarSizeCampo = new javax.swing.JSpinner();
+        jLabel13 = new javax.swing.JLabel();
+        btnModificarCampo = new javax.swing.JButton();
+        jpEliminar = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-
-        File_Chooser.setCurrentDirectory(new java.io.File("C:\\Users\\douzu"));
-        File_Chooser.setDialogTitle("");
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        btnEliminarCampo = new javax.swing.JButton();
+        jpRegistros = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JTRegistros = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtBuscarRegistro = new javax.swing.JTextPane();
+        btnBuscarRegistro = new javax.swing.JButton();
+        btnModificarRegistro = new javax.swing.JToggleButton();
+        btnIntroducirRegistro = new javax.swing.JToggleButton();
+        btnCargarRegistros = new javax.swing.JToggleButton();
+        btnBorrarRegsitro = new javax.swing.JToggleButton();
+        btnVerCruce = new javax.swing.JToggleButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menuArchivo = new javax.swing.JMenu();
+        jmiCrear = new javax.swing.JMenuItem();
+        jmiAbrir = new javax.swing.JMenuItem();
+        jmiGuardar = new javax.swing.JMenuItem();
+        JMICerrar = new javax.swing.JMenuItem();
+        JMISalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(102, 102, 102));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jpOpciones.setBackground(new java.awt.Color(204, 204, 204));
+
+        Dec.setBackground(new java.awt.Color(102, 102, 102));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Mini DBMS");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Crear Archivo");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        javax.swing.GroupLayout DecLayout = new javax.swing.GroupLayout(Dec);
+        Dec.setLayout(DecLayout);
+        DecLayout.setHorizontalGroup(
+            DecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DecLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        DecLayout.setVerticalGroup(
+            DecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DecLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        btnCampos.setText("Campos");
+        btnCampos.addActionListener(this::btnCamposActionPerformed);
+
+        btnRegistros.setText("Registros");
+        btnRegistros.addActionListener(this::btnRegistrosActionPerformed);
+
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setText("Archivo Actual:");
+
+        txtArchivoActual.setEditable(false);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtArchivoActual)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 158, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtArchivoActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jpOpcionesLayout = new javax.swing.GroupLayout(jpOpciones);
+        jpOpciones.setLayout(jpOpcionesLayout);
+        jpOpcionesLayout.setHorizontalGroup(
+            jpOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Dec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jpOpcionesLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jpOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jpOpcionesLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jpOpcionesLayout.setVerticalGroup(
+            jpOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpOpcionesLayout.createSequentialGroup()
+                .addComponent(Dec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78)
+                .addComponent(btnCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 283, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        Fondo.add(jpOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 680));
+
+        Menus.setBackground(new java.awt.Color(153, 153, 153));
+
+        jpCampos.setBackground(new java.awt.Color(153, 153, 153));
+
+        jpListar.setBackground(new java.awt.Color(102, 102, 102));
+
+        jLabel3.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel3.setText("Campos :");
+
+        jListCamposActuales.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "1", "2" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+
+        javax.swing.GroupLayout jpListarLayout = new javax.swing.GroupLayout(jpListar);
+        jpListar.setLayout(jpListarLayout);
+        jpListarLayout.setHorizontalGroup(
+            jpListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpListarLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(137, Short.MAX_VALUE))
+            .addGroup(jpListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpListarLayout.createSequentialGroup()
+                    .addContainerGap(27, Short.MAX_VALUE)
+                    .addComponent(jListCamposActuales, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(28, Short.MAX_VALUE)))
+        );
+        jpListarLayout.setVerticalGroup(
+            jpListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpListarLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jpListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpListarLayout.createSequentialGroup()
+                    .addContainerGap(85, Short.MAX_VALUE)
+                    .addComponent(jListCamposActuales, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(45, Short.MAX_VALUE)))
+        );
+
+        jpCrearCampo.setBackground(new java.awt.Color(153, 153, 153));
+
+        jLabel6.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Nombre:");
+
+        btnCrearCampo.setText("Crear");
+
+        jLabel9.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("Tamaño del campo");
+
+        jLabel10.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Tipo");
+
+        cbxTipoCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout jpCrearCampoLayout = new javax.swing.GroupLayout(jpCrearCampo);
+        jpCrearCampo.setLayout(jpCrearCampoLayout);
+        jpCrearCampoLayout.setHorizontalGroup(
+            jpCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCrearCampoLayout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(cbxTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jspCrearSizeCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80))
+            .addGroup(jpCrearCampoLayout.createSequentialGroup()
+                .addGroup(jpCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpCrearCampoLayout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(txtCrearNombreCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpCrearCampoLayout.createSequentialGroup()
+                        .addGap(213, 213, 213)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpCrearCampoLayout.createSequentialGroup()
+                        .addGap(204, 204, 204)
+                        .addComponent(btnCrearCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(165, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCrearCampoLayout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addGap(39, 39, 39))
+        );
+        jpCrearCampoLayout.setVerticalGroup(
+            jpCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCrearCampoLayout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(txtCrearNombreCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addGroup(jpCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10))
+                .addGap(18, 18, 18)
+                .addGroup(jpCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jspCrearSizeCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
+                .addComponent(btnCrearCampo)
+                .addContainerGap(96, Short.MAX_VALUE))
+        );
+
+        jtpCampos.addTab("Crear", jpCrearCampo);
+
+        jpModificarCampo.setBackground(new java.awt.Color(153, 153, 153));
+
+        jLabel11.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Nombre:");
+
+        jLabel12.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("Tipo");
+
+        cbxModificarTipoCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel13.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel13.setText("Tamaño del campo");
+
+        btnModificarCampo.setText("Modificar");
+
+        javax.swing.GroupLayout jpModificarCampoLayout = new javax.swing.GroupLayout(jpModificarCampo);
+        jpModificarCampo.setLayout(jpModificarCampoLayout);
+        jpModificarCampoLayout.setHorizontalGroup(
+            jpModificarCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpModificarCampoLayout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addComponent(cbxModificarTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jspModificarSizeCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(98, 98, 98))
+            .addGroup(jpModificarCampoLayout.createSequentialGroup()
+                .addGap(122, 122, 122)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addGap(52, 52, 52))
+            .addGroup(jpModificarCampoLayout.createSequentialGroup()
+                .addGroup(jpModificarCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpModificarCampoLayout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpModificarCampoLayout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addComponent(txtModificarNombreCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpModificarCampoLayout.createSequentialGroup()
+                        .addGap(212, 212, 212)
+                        .addComponent(btnModificarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jpModificarCampoLayout.setVerticalGroup(
+            jpModificarCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpModificarCampoLayout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addComponent(jLabel11)
+                .addGap(31, 31, 31)
+                .addComponent(txtModificarNombreCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addGroup(jpModificarCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel12))
+                .addGap(18, 18, 18)
+                .addGroup(jpModificarCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxModificarTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jspModificarSizeCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addComponent(btnModificarCampo)
+                .addGap(100, 100, 100))
+        );
+
+        jtpCampos.addTab("Modificar", jpModificarCampo);
+
+        jpEliminar.setBackground(new java.awt.Color(153, 153, 153));
+
+        javax.swing.GroupLayout jpEliminarLayout = new javax.swing.GroupLayout(jpEliminar);
+        jpEliminar.setLayout(jpEliminarLayout);
+        jpEliminarLayout.setHorizontalGroup(
+            jpEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 557, Short.MAX_VALUE)
+        );
+        jpEliminarLayout.setVerticalGroup(
+            jpEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 472, Short.MAX_VALUE)
+        );
+
+        jtpCampos.addTab("Eliminar", jpEliminar);
+
+        jLabel4.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Menu Campos");
+
+        jButton1.setText("Cambiar LLave Primaria");
+
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Llave Primaria: ");
+
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Ninguno(texto temporal)");
+
+        btnEliminarCampo.setText("Eliminar Campo Seleccionado");
+
+        javax.swing.GroupLayout jpCamposLayout = new javax.swing.GroupLayout(jpCampos);
+        jpCampos.setLayout(jpCamposLayout);
+        jpCamposLayout.setHorizontalGroup(
+            jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCamposLayout.createSequentialGroup()
+                .addGroup(jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCamposLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jtpCampos, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(jpCamposLayout.createSequentialGroup()
+                        .addGroup(jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpCamposLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpCamposLayout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addGroup(jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jpCamposLayout.createSequentialGroup()
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jpCamposLayout.createSequentialGroup()
+                                        .addComponent(jButton1)
+                                        .addGap(56, 56, 56)
+                                        .addComponent(btnEliminarCampo)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jpListar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jpCamposLayout.setVerticalGroup(
+            jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpListar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jpCamposLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtpCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
+                .addGroup(jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(btnEliminarCampo))
+                .addGap(35, 35, 35))
+        );
+
+        jpRegistros.setBackground(new java.awt.Color(153, 153, 153));
+
+        jLabel5.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Menu Registros");
+
+        JTRegistros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(JTRegistros);
+
+        jScrollPane2.setViewportView(txtBuscarRegistro);
+
+        btnBuscarRegistro.setText("Buscar");
+        btnBuscarRegistro.addActionListener(this::btnBuscarRegistroActionPerformed);
+
+        btnModificarRegistro.setText("Modificar");
+
+        btnIntroducirRegistro.setText("Introducir");
+
+        btnCargarRegistros.setText("Cargar Registros de Prueba");
+
+        btnBorrarRegsitro.setText("Borrar");
+
+        btnVerCruce.setText("Ver Cruce de Archivos");
+
+        javax.swing.GroupLayout jpRegistrosLayout = new javax.swing.GroupLayout(jpRegistros);
+        jpRegistros.setLayout(jpRegistrosLayout);
+        jpRegistrosLayout.setHorizontalGroup(
+            jpRegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpRegistrosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpRegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jpRegistrosLayout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCargarRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpRegistrosLayout.createSequentialGroup()
+                        .addGap(0, 12, Short.MAX_VALUE)
+                        .addGroup(jpRegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 876, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpRegistrosLayout.createSequentialGroup()
+                                .addGroup(jpRegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jpRegistrosLayout.createSequentialGroup()
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnBuscarRegistro))
+                                    .addGroup(jpRegistrosLayout.createSequentialGroup()
+                                        .addComponent(btnIntroducirRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(btnModificarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnBorrarRegsitro, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnVerCruce, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(16, 16, 16))
+        );
+        jpRegistrosLayout.setVerticalGroup(
+            jpRegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpRegistrosLayout.createSequentialGroup()
+                .addGroup(jpRegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpRegistrosLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpRegistrosLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(btnCargarRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addGroup(jpRegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpRegistrosLayout.createSequentialGroup()
+                        .addGroup(jpRegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnIntroducirRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnModificarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpRegistrosLayout.createSequentialGroup()
+                        .addComponent(btnBorrarRegsitro, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscarRegistro))
+                    .addComponent(btnVerCruce, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
+        );
+
+        javax.swing.GroupLayout MenusLayout = new javax.swing.GroupLayout(Menus);
+        Menus.setLayout(MenusLayout);
+        MenusLayout.setHorizontalGroup(
+            MenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpCampos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(MenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jpRegistros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        MenusLayout.setVerticalGroup(
+            MenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpCampos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(MenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jpRegistros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        Fondo.add(Menus, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 910, 680));
+
+        menuArchivo.setText("Archivo");
+
+        jmiCrear.setText("Crear");
+        menuArchivo.add(jmiCrear);
+
+        jmiAbrir.setText("Abrir");
+        jmiAbrir.addActionListener(this::jmiAbrirActionPerformed);
+        menuArchivo.add(jmiAbrir);
+
+        jmiGuardar.setText("Guardar");
+        menuArchivo.add(jmiGuardar);
+
+        JMICerrar.setText("Cerrar");
+        menuArchivo.add(JMICerrar);
+
+        JMISalir.setText("Salir");
+        menuArchivo.add(JMISalir);
+
+        jMenuBar1.add(menuArchivo);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addContainerGap(1050, Short.MAX_VALUE))
+            .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addGap(127, 127, 127)
-                .addComponent(jButton1)
-                .addContainerGap(497, Short.MAX_VALUE))
+            .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        if (File_Chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-            
-            File new_file = File_Chooser.getSelectedFile();
-            try {
-                new_file.createNewFile();
-                Functions.writeHeader(new_file, new Header(new_file.getName()));
-            } catch (IOException ex) {
-                System.getLogger(GUI.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-            }
-            
-        }
+    private void btnBuscarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarRegistroActionPerformed
+      ;
+    }//GEN-LAST:event_btnBuscarRegistroActionPerformed
+
+    private void btnRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrosActionPerformed
+        ocultarPaneles();       
+        jpRegistros.setVisible(true);
+    }//GEN-LAST:event_btnRegistrosActionPerformed
+
+    private void btnCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCamposActionPerformed
+         ocultarPaneles();
+         jpCampos.setVisible(true);
+    }//GEN-LAST:event_btnCamposActionPerformed
+
+    private void jmiAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAbrirActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new File("./"));
+        int resultado = chooser.showOpenDialog(this);
+        if (resultado == JFileChooser.APPROVE_OPTION ) {
+            archivoActual = chooser.getSelectedFile();
+            txtArchivoActual.setText(archivoActual.getName());
+        }else{
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+            JOptionPane.showMessageDialog(this, "Hubo un error");
+        }
+        actualizarBotones();
+    }//GEN-LAST:event_jmiAbrirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,10 +650,79 @@ public class GUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new GUI().setVisible(true));
     }
+    
+    public void actualizarBotones(){
+        if (archivoActual!=null) {
+            btnCampos.setEnabled(true);
+            btnRegistros.setEnabled(true);
+        }else{
+            btnCampos.setEnabled(false);
+            btnRegistros.setEnabled(false);
+            
+        }
+    }
+    public void ocultarPaneles(){
+        jpRegistros.setVisible(false);
+        jpCampos.setVisible(false);
+    
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFileChooser File_Chooser;
+    private javax.swing.JPanel Dec;
+    private javax.swing.JPanel Fondo;
+    private javax.swing.JMenuItem JMICerrar;
+    private javax.swing.JMenuItem JMISalir;
+    private javax.swing.JTable JTRegistros;
+    private javax.swing.JPanel Menus;
+    private javax.swing.JToggleButton btnBorrarRegsitro;
+    private javax.swing.JButton btnBuscarRegistro;
+    private javax.swing.JToggleButton btnCampos;
+    private javax.swing.JToggleButton btnCargarRegistros;
+    private javax.swing.JButton btnCrearCampo;
+    private javax.swing.JButton btnEliminarCampo;
+    private javax.swing.JToggleButton btnIntroducirRegistro;
+    private javax.swing.JButton btnModificarCampo;
+    private javax.swing.JToggleButton btnModificarRegistro;
+    private javax.swing.JToggleButton btnRegistros;
+    private javax.swing.JToggleButton btnVerCruce;
+    private javax.swing.JComboBox<String> cbxModificarTipoCampo;
+    private javax.swing.JComboBox<String> cbxTipoCampo;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<String> jListCamposActuales;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JMenuItem jmiAbrir;
+    private javax.swing.JMenuItem jmiCrear;
+    private javax.swing.JMenuItem jmiGuardar;
+    private javax.swing.JPanel jpCampos;
+    private javax.swing.JPanel jpCrearCampo;
+    private javax.swing.JPanel jpEliminar;
+    private javax.swing.JPanel jpListar;
+    private javax.swing.JPanel jpModificarCampo;
+    private javax.swing.JPanel jpOpciones;
+    private javax.swing.JPanel jpRegistros;
+    private javax.swing.JSpinner jspCrearSizeCampo;
+    private javax.swing.JSpinner jspModificarSizeCampo;
+    private javax.swing.JTabbedPane jtpCampos;
+    private javax.swing.JMenu menuArchivo;
+    private javax.swing.JTextField txtArchivoActual;
+    private javax.swing.JTextPane txtBuscarRegistro;
+    private javax.swing.JTextField txtCrearNombreCampo;
+    private javax.swing.JTextField txtModificarNombreCampo;
     // End of variables declaration//GEN-END:variables
 }
