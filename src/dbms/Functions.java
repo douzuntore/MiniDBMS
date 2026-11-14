@@ -23,23 +23,11 @@ public class Functions {
             
             FileChannel fc = raf.getChannel();
             
-            int position = 4;
-            //escritura de firma
-            fc.write(ByteBuffer.wrap(new byte[]{18, 84, -47, 21}));
+            int position = 0;
             
             ByteBuffer bb = header.wrap().flip();
             
-            fc.write(bb, 0);
-            position += bb.capacity();
-            
-            for (Field field : header.getFields()) {
-                ByteBuffer[] bbs = field.wrapHeaderData();
-                for (int i = 0; i < bbs.length; i++) {
-                    bbs[i].flip();
-                    fc.write(bbs[i], position);
-                    position += bbs[i].capacity();
-                }
-            }
+            fc.write(bb, position);
             
         }
     }

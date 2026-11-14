@@ -39,7 +39,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        File_Chooser.setCurrentDirectory(new java.io.File("C:\\Program Files\\Apache NetBeans\\bin\\."));
+        File_Chooser.setCurrentDirectory(new java.io.File("C:\\Users\\douzu"));
         File_Chooser.setDialogTitle("");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -81,7 +81,12 @@ public class GUI extends javax.swing.JFrame {
         if (File_Chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
             
             File new_file = File_Chooser.getSelectedFile();
-            System.out.println(new_file.getPath());
+            try {
+                new_file.createNewFile();
+                Functions.writeHeader(new_file, new Header(new_file.getName()));
+            } catch (IOException ex) {
+                System.getLogger(GUI.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
             
         }
         
