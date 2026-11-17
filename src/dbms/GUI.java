@@ -41,6 +41,34 @@ public class GUI extends javax.swing.JFrame {
     private void initComponents() {
 
         File_Chooser = new javax.swing.JFileChooser();
+        DialogEntero = new javax.swing.JDialog();
+        jLabel13 = new javax.swing.JLabel();
+        EnteroJSpinner = new javax.swing.JSpinner();
+        EnteroAceptar = new javax.swing.JButton();
+        DialogTexto = new javax.swing.JDialog();
+        jLabel14 = new javax.swing.JLabel();
+        TextoSpinner = new javax.swing.JSpinner();
+        TextotxtField = new javax.swing.JTextField();
+        TextoAceptar = new javax.swing.JButton();
+        DialogDecimal = new javax.swing.JDialog();
+        jLabel15 = new javax.swing.JLabel();
+        DecimalSpinner1 = new javax.swing.JSpinner();
+        DecimalSpinner2 = new javax.swing.JSpinner();
+        DecimaltxtField = new javax.swing.JTextField();
+        DecimalAceptar = new javax.swing.JButton();
+        DialogFecha = new javax.swing.JDialog();
+        jLabel16 = new javax.swing.JLabel();
+        FechaDíaSpinner = new javax.swing.JSpinner();
+        FechaMesSpinner = new javax.swing.JSpinner();
+        FechaAnioSpinner = new javax.swing.JSpinner();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        FechaAceptar = new javax.swing.JButton();
+        DialogBoolean = new javax.swing.JDialog();
+        jLabel20 = new javax.swing.JLabel();
+        BooleandoTFCmbBox = new javax.swing.JComboBox<>();
+        BooleanoAceptar = new javax.swing.JButton();
         Fondo = new javax.swing.JPanel();
         Panel_Opciones = new javax.swing.JPanel();
         Dec = new javax.swing.JPanel();
@@ -60,17 +88,13 @@ public class GUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         btnCrearCampo = new javax.swing.JButton();
         txtCrearNombreCampo = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         cbxTipoCampo = new javax.swing.JComboBox<>();
-        jspCrearSizeCampo = new javax.swing.JSpinner();
         jpModificarCampo = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         txtModificarNombreCampo = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         cbxModificarTipoCampo = new javax.swing.JComboBox<>();
-        jspModificarSizeCampo = new javax.swing.JSpinner();
-        jLabel13 = new javax.swing.JLabel();
         btnModificarCampo = new javax.swing.JButton();
         jpEliminar = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -98,6 +122,218 @@ public class GUI extends javax.swing.JFrame {
         JMICerrar = new javax.swing.JMenuItem();
         JMISalir = new javax.swing.JMenuItem();
 
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel13.setText("Entero");
+
+        EnteroAceptar.setText("Aceptar");
+
+        javax.swing.GroupLayout DialogEnteroLayout = new javax.swing.GroupLayout(DialogEntero.getContentPane());
+        DialogEntero.getContentPane().setLayout(DialogEnteroLayout);
+        DialogEnteroLayout.setHorizontalGroup(
+            DialogEnteroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DialogEnteroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel13)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(DialogEnteroLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(EnteroAceptar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(DialogEnteroLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(EnteroJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+        DialogEnteroLayout.setVerticalGroup(
+            DialogEnteroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DialogEnteroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel13)
+                .addGap(18, 18, 18)
+                .addComponent(EnteroJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(EnteroAceptar)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel14.setText("Texto");
+
+        TextotxtField.addActionListener(this::TextotxtFieldActionPerformed);
+
+        TextoAceptar.setText("Aceptar");
+
+        javax.swing.GroupLayout DialogTextoLayout = new javax.swing.GroupLayout(DialogTexto.getContentPane());
+        DialogTexto.getContentPane().setLayout(DialogTextoLayout);
+        DialogTextoLayout.setHorizontalGroup(
+            DialogTextoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DialogTextoLayout.createSequentialGroup()
+                .addGroup(DialogTextoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DialogTextoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel14))
+                    .addGroup(DialogTextoLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(DialogTextoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TextotxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(134, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DialogTextoLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(TextoAceptar)
+                .addGap(47, 47, 47))
+        );
+        DialogTextoLayout.setVerticalGroup(
+            DialogTextoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DialogTextoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14)
+                .addGap(28, 28, 28)
+                .addComponent(TextoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(TextotxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(TextoAceptar)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel15.setText("Decimal");
+
+        DecimalAceptar.setText("Aceptar");
+
+        javax.swing.GroupLayout DialogDecimalLayout = new javax.swing.GroupLayout(DialogDecimal.getContentPane());
+        DialogDecimal.getContentPane().setLayout(DialogDecimalLayout);
+        DialogDecimalLayout.setHorizontalGroup(
+            DialogDecimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DialogDecimalLayout.createSequentialGroup()
+                .addGroup(DialogDecimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DialogDecimalLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel15))
+                    .addGroup(DialogDecimalLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(DecimalSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(DecimalSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(DialogDecimalLayout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(DecimaltxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(DialogDecimalLayout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(DecimalAceptar)))
+                .addContainerGap(134, Short.MAX_VALUE))
+        );
+        DialogDecimalLayout.setVerticalGroup(
+            DialogDecimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DialogDecimalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15)
+                .addGap(18, 18, 18)
+                .addGroup(DialogDecimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DecimalSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DecimalSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(DecimaltxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(DecimalAceptar)
+                .addContainerGap(121, Short.MAX_VALUE))
+        );
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel16.setText("Fecha");
+
+        jLabel17.setText("Día");
+
+        jLabel18.setText("Mes");
+
+        jLabel19.setText("Año");
+
+        FechaAceptar.setText("Aceptar");
+
+        javax.swing.GroupLayout DialogFechaLayout = new javax.swing.GroupLayout(DialogFecha.getContentPane());
+        DialogFecha.getContentPane().setLayout(DialogFechaLayout);
+        DialogFechaLayout.setHorizontalGroup(
+            DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DialogFechaLayout.createSequentialGroup()
+                .addGroup(DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DialogFechaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel16))
+                    .addGroup(DialogFechaLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(FechaDíaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(FechaMesSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel18))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel19)
+                            .addComponent(FechaAnioSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(DialogFechaLayout.createSequentialGroup()
+                        .addGap(141, 141, 141)
+                        .addComponent(FechaAceptar)))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        DialogFechaLayout.setVerticalGroup(
+            DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DialogFechaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FechaDíaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FechaMesSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FechaAnioSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(FechaAceptar)
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel20.setText("Booleano");
+
+        BooleandoTFCmbBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "True", "False" }));
+
+        BooleanoAceptar.setText("Aceptar");
+
+        javax.swing.GroupLayout DialogBooleanLayout = new javax.swing.GroupLayout(DialogBoolean.getContentPane());
+        DialogBoolean.getContentPane().setLayout(DialogBooleanLayout);
+        DialogBooleanLayout.setHorizontalGroup(
+            DialogBooleanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DialogBooleanLayout.createSequentialGroup()
+                .addGroup(DialogBooleanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DialogBooleanLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel20))
+                    .addGroup(DialogBooleanLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(BooleandoTFCmbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(DialogBooleanLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(BooleanoAceptar)))
+                .addContainerGap(90, Short.MAX_VALUE))
+        );
+        DialogBooleanLayout.setVerticalGroup(
+            DialogBooleanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DialogBooleanLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel20)
+                .addGap(18, 18, 18)
+                .addComponent(BooleandoTFCmbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(BooleanoAceptar)
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 102));
 
@@ -108,7 +344,6 @@ public class GUI extends javax.swing.JFrame {
         Dec.setBackground(new java.awt.Color(102, 102, 102));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Mini DBMS");
 
         javax.swing.GroupLayout DecLayout = new javax.swing.GroupLayout(Dec);
@@ -239,31 +474,20 @@ public class GUI extends javax.swing.JFrame {
         jpCrearCampo.setBackground(new java.awt.Color(153, 153, 153));
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Nombre:");
 
         btnCrearCampo.setText("Crear");
 
-        jLabel9.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setText("Tamaño del campo");
-
         jLabel10.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Tipo");
 
-        cbxTipoCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxTipoCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Entero", "Texto", "Fecha", "Decimal", "Booleano" }));
+        cbxTipoCampo.addActionListener(this::cbxTipoCampoActionPerformed);
 
         javax.swing.GroupLayout jpCrearCampoLayout = new javax.swing.GroupLayout(jpCrearCampo);
         jpCrearCampo.setLayout(jpCrearCampoLayout);
         jpCrearCampoLayout.setHorizontalGroup(
             jpCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpCrearCampoLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(cbxTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jspCrearSizeCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80))
             .addGroup(jpCrearCampoLayout.createSequentialGroup()
                 .addGroup(jpCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCrearCampoLayout.createSequentialGroup()
@@ -274,14 +498,14 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpCrearCampoLayout.createSequentialGroup()
                         .addGap(204, 204, 204)
-                        .addComponent(btnCrearCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(171, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCrearCampoLayout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9)
-                .addGap(39, 39, 39))
+                        .addComponent(btnCrearCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpCrearCampoLayout.createSequentialGroup()
+                        .addGap(230, 230, 230)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpCrearCampoLayout.createSequentialGroup()
+                        .addGap(196, 196, 196)
+                        .addComponent(cbxTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(80, 171, Short.MAX_VALUE))
         );
         jpCrearCampoLayout.setVerticalGroup(
             jpCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,17 +514,13 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(txtCrearNombreCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
-                .addGroup(jpCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10))
-                .addGap(18, 18, 18)
-                .addGroup(jpCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jspCrearSizeCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(38, 38, 38)
+                .addComponent(jLabel10)
+                .addGap(30, 30, 30)
+                .addComponent(cbxTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
                 .addComponent(btnCrearCampo)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         jtpCampos.addTab("Crear", jpCrearCampo);
@@ -308,18 +528,12 @@ public class GUI extends javax.swing.JFrame {
         jpModificarCampo.setBackground(new java.awt.Color(153, 153, 153));
 
         jLabel11.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Nombre:");
 
         jLabel12.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Tipo");
 
-        cbxModificarTipoCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel13.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel13.setText("Tamaño del campo");
+        cbxModificarTipoCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Entero", "Texto", "Fecha", "Decimal", "Booleano" }));
 
         btnModificarCampo.setText("Modificar");
 
@@ -327,18 +541,6 @@ public class GUI extends javax.swing.JFrame {
         jpModificarCampo.setLayout(jpModificarCampoLayout);
         jpModificarCampoLayout.setHorizontalGroup(
             jpModificarCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpModificarCampoLayout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(cbxModificarTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jspModificarSizeCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(98, 98, 98))
-            .addGroup(jpModificarCampoLayout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
-                .addComponent(jLabel13)
-                .addGap(52, 52, 52))
             .addGroup(jpModificarCampoLayout.createSequentialGroup()
                 .addGroup(jpModificarCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpModificarCampoLayout.createSequentialGroup()
@@ -348,9 +550,16 @@ public class GUI extends javax.swing.JFrame {
                         .addGap(132, 132, 132)
                         .addComponent(txtModificarNombreCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpModificarCampoLayout.createSequentialGroup()
-                        .addGap(212, 212, 212)
-                        .addComponent(btnModificarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(223, 223, 223)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpModificarCampoLayout.createSequentialGroup()
+                        .addGap(187, 187, 187)
+                        .addGroup(jpModificarCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxModificarTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpModificarCampoLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(btnModificarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
         jpModificarCampoLayout.setVerticalGroup(
             jpModificarCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,17 +568,13 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addGap(31, 31, 31)
                 .addComponent(txtModificarNombreCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addGroup(jpModificarCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel12))
                 .addGap(18, 18, 18)
-                .addGroup(jpModificarCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxModificarTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jspModificarSizeCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addComponent(jLabel12)
+                .addGap(36, 36, 36)
+                .addComponent(cbxModificarTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
                 .addComponent(btnModificarCampo)
-                .addGap(100, 100, 100))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         jtpCampos.addTab("Modificar", jpModificarCampo);
@@ -390,17 +595,14 @@ public class GUI extends javax.swing.JFrame {
         jtpCampos.addTab("Eliminar", jpEliminar);
 
         jLabel4.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Menu Campos");
 
         jButton1.setText("Cambiar LLave Primaria");
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Llave Primaria: ");
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Ninguno(texto temporal)");
 
         btnEliminarCampo.setText("Eliminar Campo Seleccionado");
@@ -456,7 +658,6 @@ public class GUI extends javax.swing.JFrame {
         jpRegistros.setBackground(new java.awt.Color(153, 153, 153));
 
         jLabel5.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Menu Registros");
 
         JTRegistros.setModel(new javax.swing.table.DefaultTableModel(
@@ -674,6 +875,14 @@ public class GUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_JMICerrarActionPerformed
 
+    private void cbxTipoCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoCampoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxTipoCampoActionPerformed
+
+    private void TextotxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextotxtFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextotxtFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -746,7 +955,24 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> BooleandoTFCmbBox;
+    private javax.swing.JButton BooleanoAceptar;
     private javax.swing.JPanel Dec;
+    private javax.swing.JButton DecimalAceptar;
+    private javax.swing.JSpinner DecimalSpinner1;
+    private javax.swing.JSpinner DecimalSpinner2;
+    private javax.swing.JTextField DecimaltxtField;
+    private javax.swing.JDialog DialogBoolean;
+    private javax.swing.JDialog DialogDecimal;
+    private javax.swing.JDialog DialogEntero;
+    private javax.swing.JDialog DialogFecha;
+    private javax.swing.JDialog DialogTexto;
+    private javax.swing.JButton EnteroAceptar;
+    private javax.swing.JSpinner EnteroJSpinner;
+    private javax.swing.JButton FechaAceptar;
+    private javax.swing.JSpinner FechaAnioSpinner;
+    private javax.swing.JSpinner FechaDíaSpinner;
+    private javax.swing.JSpinner FechaMesSpinner;
     private javax.swing.JFileChooser File_Chooser;
     private javax.swing.JPanel Fondo;
     private javax.swing.JMenuItem JMICerrar;
@@ -756,6 +982,9 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar Menu_Bar;
     private javax.swing.JPanel Panel_Menus;
     private javax.swing.JPanel Panel_Opciones;
+    private javax.swing.JButton TextoAceptar;
+    private javax.swing.JSpinner TextoSpinner;
+    private javax.swing.JTextField TextotxtField;
     private javax.swing.JToggleButton btnBorrarRegsitro;
     private javax.swing.JButton btnBuscarRegistro;
     private javax.swing.JToggleButton btnCampos;
@@ -775,14 +1004,20 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -795,8 +1030,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jpListar;
     private javax.swing.JPanel jpModificarCampo;
     private javax.swing.JPanel jpRegistros;
-    private javax.swing.JSpinner jspCrearSizeCampo;
-    private javax.swing.JSpinner jspModificarSizeCampo;
     private javax.swing.JTabbedPane jtpCampos;
     private javax.swing.JMenu menuArchivo;
     private javax.swing.JTextField txtArchivoActual;
