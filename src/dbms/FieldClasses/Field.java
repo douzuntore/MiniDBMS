@@ -22,7 +22,8 @@ public abstract class Field {
     protected String name;
     
     public abstract ByteBuffer[] wrapFieldData();
-    protected abstract byte getFieldType();
+    //cambie de protected a public - soza
+    public abstract byte getFieldType();
 
     public Field(String name, boolean opt) throws IllegalArgumentException {
         
@@ -48,5 +49,8 @@ public abstract class Field {
         return bb;
         
     }
+    
+    public String getName() { return name; }
+    public boolean isOpcional() { return opt == 1; }
     
 }

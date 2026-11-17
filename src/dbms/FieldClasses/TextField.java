@@ -27,7 +27,7 @@ public class TextField extends Field {
             throw new IllegalArgumentException("Tamaño máximo fuera de rango");
         }
         
-        this.max_size = (short)(data.getBytes().length + Short.MIN_VALUE);
+        this.max_size = (short)(max_size + Short.MIN_VALUE);
         
         if (data.length() > (max_size + 32768)) {
             throw new IllegalArgumentException("Texto muy grande");
@@ -45,19 +45,18 @@ public class TextField extends Field {
     
     @Override
     public ByteBuffer[] wrapFieldData() {
-        
+        total_size = 0;
         ByteBuffer bb = ByteBuffer.allocate(sub_fixed_size + (dft_data_size - Short.MIN_VALUE));
         bb.put(getFieldType());
         bb.putShort(max_size);
         bb.putShort(dft_data_size);
         bb.put(dft_data.getBytes());
-        
         total_size += bb.capacity() + Integer.BYTES;
-        
+        ByteBuffer gen_data_bb = getGeneralData();
         return new ByteBuffer[]{
-                getGeneralData(),
-                bb
+            ByteBuffer.allocate(4).putInt(total_size).rewind(),
+            gen_data_bb.rewind(),
+            bb.rewind()
         };
-        
     }
 }

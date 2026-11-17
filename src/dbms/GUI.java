@@ -9,6 +9,12 @@ import java.io.File;
 import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -18,7 +24,12 @@ public class GUI extends javax.swing.JFrame {
     
     private static final int version = 1;
     private static File archivo_actual =  new File("prueba.txt");
-    
+    private final ArrayList<Field> campos = new ArrayList<>();
+    private final DefaultListModel<String> modeloCampos = new DefaultListModel<>();
+    private static final String[] TIPOS = {"Entero", "Texto", "Fecha", "Decimal", "Booleano"};
+    private Field campoResultado;
+    private String nombrePendiente;
+    private boolean opcionalPendiente;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUI.class.getName());
 
     /**
@@ -27,8 +38,11 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
         archivo_actual = null;
+        Lista_Campos.setModel(modeloCampos);
+        configurarSpinners();
         ocultarPaneles();
         actualizarBotones();
+
     }
 
     /**
@@ -58,7 +72,7 @@ public class GUI extends javax.swing.JFrame {
         DecimalAceptar = new javax.swing.JButton();
         DialogFecha = new javax.swing.JDialog();
         jLabel16 = new javax.swing.JLabel();
-        FechaDíaSpinner = new javax.swing.JSpinner();
+        FechaDiaSpinner = new javax.swing.JSpinner();
         FechaMesSpinner = new javax.swing.JSpinner();
         FechaAnioSpinner = new javax.swing.JSpinner();
         jLabel17 = new javax.swing.JLabel();
@@ -90,12 +104,14 @@ public class GUI extends javax.swing.JFrame {
         txtCrearNombreCampo = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         cbxTipoCampo = new javax.swing.JComboBox<>();
+        chkCrearObligatorio = new javax.swing.JCheckBox();
         jpModificarCampo = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         txtModificarNombreCampo = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         cbxModificarTipoCampo = new javax.swing.JComboBox<>();
         btnModificarCampo = new javax.swing.JButton();
+        chkModificarObligatorio = new javax.swing.JCheckBox();
         jpEliminar = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -122,10 +138,13 @@ public class GUI extends javax.swing.JFrame {
         JMICerrar = new javax.swing.JMenuItem();
         JMISalir = new javax.swing.JMenuItem();
 
+        DialogEntero.setModal(true);
+
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel13.setText("Entero");
 
         EnteroAceptar.setText("Aceptar");
+        EnteroAceptar.addActionListener(this::EnteroAceptarActionPerformed);
 
         javax.swing.GroupLayout DialogEnteroLayout = new javax.swing.GroupLayout(DialogEntero.getContentPane());
         DialogEntero.getContentPane().setLayout(DialogEnteroLayout);
@@ -156,12 +175,15 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        DialogTexto.setModal(true);
+
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel14.setText("Texto");
 
         TextotxtField.addActionListener(this::TextotxtFieldActionPerformed);
 
         TextoAceptar.setText("Aceptar");
+        TextoAceptar.addActionListener(this::TextoAceptarActionPerformed);
 
         javax.swing.GroupLayout DialogTextoLayout = new javax.swing.GroupLayout(DialogTexto.getContentPane());
         DialogTexto.getContentPane().setLayout(DialogTextoLayout);
@@ -197,10 +219,13 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
+        DialogDecimal.setModal(true);
+
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel15.setText("Decimal");
 
         DecimalAceptar.setText("Aceptar");
+        DecimalAceptar.addActionListener(this::DecimalAceptarActionPerformed);
 
         javax.swing.GroupLayout DialogDecimalLayout = new javax.swing.GroupLayout(DialogDecimal.getContentPane());
         DialogDecimal.getContentPane().setLayout(DialogDecimalLayout);
@@ -222,7 +247,7 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(DialogDecimalLayout.createSequentialGroup()
                         .addGap(109, 109, 109)
                         .addComponent(DecimalAceptar)))
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         DialogDecimalLayout.setVerticalGroup(
             DialogDecimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,8 +262,10 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(DecimaltxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(DecimalAceptar)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
+
+        DialogFecha.setModal(true);
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel16.setText("Fecha");
@@ -250,6 +277,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel19.setText("Año");
 
         FechaAceptar.setText("Aceptar");
+        FechaAceptar.addActionListener(this::FechaAceptarActionPerformed);
 
         javax.swing.GroupLayout DialogFechaLayout = new javax.swing.GroupLayout(DialogFecha.getContentPane());
         DialogFecha.getContentPane().setLayout(DialogFechaLayout);
@@ -263,7 +291,7 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(DialogFechaLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(FechaDíaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(FechaDiaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel17))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,7 +318,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jLabel19))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(FechaDíaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FechaDiaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FechaMesSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FechaAnioSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
@@ -298,12 +326,15 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
+        DialogBoolean.setModal(true);
+
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel20.setText("Booleano");
 
         BooleandoTFCmbBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "True", "False" }));
 
         BooleanoAceptar.setText("Aceptar");
+        BooleanoAceptar.addActionListener(this::BooleanoAceptarActionPerformed);
 
         javax.swing.GroupLayout DialogBooleanLayout = new javax.swing.GroupLayout(DialogBoolean.getContentPane());
         DialogBoolean.getContentPane().setLayout(DialogBooleanLayout);
@@ -443,6 +474,7 @@ public class GUI extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        Lista_Campos.addListSelectionListener(this::Lista_CamposValueChanged);
 
         javax.swing.GroupLayout jpListarLayout = new javax.swing.GroupLayout(jpListar);
         jpListar.setLayout(jpListarLayout);
@@ -477,12 +509,15 @@ public class GUI extends javax.swing.JFrame {
         jLabel6.setText("Nombre:");
 
         btnCrearCampo.setText("Crear");
+        btnCrearCampo.addActionListener(this::btnCrearCampoActionPerformed);
 
         jLabel10.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jLabel10.setText("Tipo");
 
         cbxTipoCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Entero", "Texto", "Fecha", "Decimal", "Booleano" }));
-        cbxTipoCampo.addActionListener(this::cbxTipoCampoActionPerformed);
+
+        chkCrearObligatorio.setText("Obligatorio");
+        chkCrearObligatorio.addActionListener(this::chkCrearObligatorioActionPerformed);
 
         javax.swing.GroupLayout jpCrearCampoLayout = new javax.swing.GroupLayout(jpCrearCampo);
         jpCrearCampo.setLayout(jpCrearCampoLayout);
@@ -497,14 +532,18 @@ public class GUI extends javax.swing.JFrame {
                         .addGap(213, 213, 213)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpCrearCampoLayout.createSequentialGroup()
-                        .addGap(204, 204, 204)
-                        .addComponent(btnCrearCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpCrearCampoLayout.createSequentialGroup()
                         .addGap(230, 230, 230)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpCrearCampoLayout.createSequentialGroup()
-                        .addGap(196, 196, 196)
-                        .addComponent(cbxTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(189, 189, 189)
+                        .addComponent(cbxTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpCrearCampoLayout.createSequentialGroup()
+                        .addGap(204, 204, 204)
+                        .addGroup(jpCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCrearCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpCrearCampoLayout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(chkCrearObligatorio)))))
                 .addGap(80, 171, Short.MAX_VALUE))
         );
         jpCrearCampoLayout.setVerticalGroup(
@@ -514,11 +553,13 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(txtCrearNombreCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel10)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
+                .addGap(41, 41, 41)
+                .addComponent(chkCrearObligatorio)
+                .addGap(34, 34, 34)
                 .addComponent(btnCrearCampo)
                 .addContainerGap(93, Short.MAX_VALUE))
         );
@@ -536,6 +577,9 @@ public class GUI extends javax.swing.JFrame {
         cbxModificarTipoCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Entero", "Texto", "Fecha", "Decimal", "Booleano" }));
 
         btnModificarCampo.setText("Modificar");
+        btnModificarCampo.addActionListener(this::btnModificarCampoActionPerformed);
+
+        chkModificarObligatorio.setText("Obligatorio");
 
         javax.swing.GroupLayout jpModificarCampoLayout = new javax.swing.GroupLayout(jpModificarCampo);
         jpModificarCampo.setLayout(jpModificarCampoLayout);
@@ -554,11 +598,13 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpModificarCampoLayout.createSequentialGroup()
                         .addGap(187, 187, 187)
-                        .addGroup(jpModificarCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxModificarTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jpModificarCampoLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(btnModificarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(cbxModificarTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpModificarCampoLayout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addComponent(btnModificarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpModificarCampoLayout.createSequentialGroup()
+                        .addGap(211, 211, 211)
+                        .addComponent(chkModificarObligatorio)))
                 .addContainerGap(174, Short.MAX_VALUE))
         );
         jpModificarCampoLayout.setVerticalGroup(
@@ -572,9 +618,11 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jLabel12)
                 .addGap(36, 36, 36)
                 .addComponent(cbxModificarTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addGap(26, 26, 26)
+                .addComponent(chkModificarObligatorio)
+                .addGap(35, 35, 35)
                 .addComponent(btnModificarCampo)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         jtpCampos.addTab("Modificar", jpModificarCampo);
@@ -606,6 +654,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel8.setText("Ninguno(texto temporal)");
 
         btnEliminarCampo.setText("Eliminar Campo Seleccionado");
+        btnEliminarCampo.addActionListener(this::btnEliminarCampoActionPerformed);
 
         javax.swing.GroupLayout jpCamposLayout = new javax.swing.GroupLayout(jpCampos);
         jpCampos.setLayout(jpCamposLayout);
@@ -841,19 +890,16 @@ public class GUI extends javax.swing.JFrame {
         if (File_Chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
             
             File f = File_Chooser.getSelectedFile();
-            
             String file_name = f.getName();
             if (file_name.contains(".")) {
                 file_name = file_name.split("\\.")[0];
             }
-            File new_name = new File(file_name + ".disv");
-            new_name.delete();
-            f.renameTo(new_name);
-            
+            f = new File(f.getParentFile(), file_name + ".disv");
+            Field[] llave_primaria = {new IntField("llave_primaria", false, 0)};
             try {
                 // escritura de encabezado + llave primaria
                 Functions.writeHeader(f, new Header(file_name));
-                Field[] llave_primaria = {new IntField("llave_primaria", false, 0)};
+                
                 Functions.writeFieldMetadata(f, llave_primaria);
             //<editor-fold defaultstate="collapsed" desc="catch IO">
             } catch (IOException ex) {
@@ -862,7 +908,10 @@ public class GUI extends javax.swing.JFrame {
             }
             
             abrirArchivo(f);
-            
+            if (archivo_actual != null) {
+                campos.add(llave_primaria[0]);
+                actualizarLista();
+            }
         }
         
         actualizarBotones();
@@ -875,13 +924,142 @@ public class GUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_JMICerrarActionPerformed
 
-    private void cbxTipoCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoCampoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxTipoCampoActionPerformed
-
     private void TextotxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextotxtFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextotxtFieldActionPerformed
+
+    private void chkCrearObligatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkCrearObligatorioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkCrearObligatorioActionPerformed
+
+    private void EnteroAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnteroAceptarActionPerformed
+        int valor = (int) EnteroJSpinner.getValue();
+        campoResultado = new IntField(nombrePendiente, opcionalPendiente, valor);
+        DialogEntero.setVisible(false);
+    }//GEN-LAST:event_EnteroAceptarActionPerformed
+
+    private void TextoAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoAceptarActionPerformed
+        int max = (int) TextoSpinner.getValue();
+        String defecto = TextotxtField.getText();
+        if (defecto.getBytes(StandardCharsets.UTF_8).length > max) {
+            JOptionPane.showMessageDialog(DialogTexto, "El valor por defecto excede la longitud máxima");
+            return;
+        }
+        try {
+            campoResultado = new TextField(nombrePendiente, opcionalPendiente, max, defecto);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(DialogTexto, ex.getMessage());
+            return;
+        }
+        DialogTexto.setVisible(false);
+    }//GEN-LAST:event_TextoAceptarActionPerformed
+
+    private void DecimalAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DecimalAceptarActionPerformed
+       int enteros = (int) DecimalSpinner1.getValue();
+       int decimales = (int) DecimalSpinner2.getValue();
+       String defecto = DecimaltxtField.getText().trim();
+       if (!defecto.isEmpty()) {
+           try {
+               Double.parseDouble(defecto);
+           } catch (NumberFormatException ex) {
+               JOptionPane.showMessageDialog(DialogDecimal, "El valor por defecto no es un número válido");
+               return;
+           }
+       }
+       campoResultado = new DecimalField(nombrePendiente, opcionalPendiente, enteros, decimales);
+       DialogDecimal.setVisible(false);
+    }//GEN-LAST:event_DecimalAceptarActionPerformed
+
+    private void FechaAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FechaAceptarActionPerformed
+        int dia = (int) FechaDiaSpinner.getValue();
+        int mes = (int) FechaMesSpinner.getValue();
+        int anio = (int) FechaAnioSpinner.getValue();
+        try {
+            java.time.LocalDate.of(anio, mes, dia);
+        } catch (java.time.DateTimeException ex) {
+            JOptionPane.showMessageDialog(DialogFecha, "La fecha no es válida");
+            return;
+        }
+        campoResultado = new DateField(nombrePendiente, opcionalPendiente, (short) anio, (byte) mes, (byte) dia);
+        DialogFecha.setVisible(false);
+    }//GEN-LAST:event_FechaAceptarActionPerformed
+
+    private void BooleanoAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BooleanoAceptarActionPerformed
+        boolean valor = "True".equals(BooleandoTFCmbBox.getSelectedItem());
+        campoResultado = new BoolField(nombrePendiente, opcionalPendiente, valor);
+        DialogBoolean.setVisible(false);
+    }//GEN-LAST:event_BooleanoAceptarActionPerformed
+
+    private void btnCrearCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCampoActionPerformed
+        String nombre = validarNombre(txtCrearNombreCampo.getText(), -1);
+        if (nombre == null) {
+            return;
+        }
+        Field nuevo = pedirCampo(nombre, !chkCrearObligatorio.isSelected(), cbxTipoCampo.getSelectedIndex());
+        if (nuevo == null) {
+            return;
+        }
+        campos.add(nuevo);
+        guardarCampos();
+        actualizarLista();
+        txtCrearNombreCampo.setText("");
+    }//GEN-LAST:event_btnCrearCampoActionPerformed
+
+    private void btnModificarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCampoActionPerformed
+        int i = Lista_Campos.getSelectedIndex();
+        if (i < 0) {
+            aviso("Seleccioná un campo de la lista");
+            return;
+        }
+        String nombre = validarNombre(txtModificarNombreCampo.getText(), i);
+        if (nombre == null) {
+            return;
+        }
+        boolean opcional = i == 0 ? false : !chkModificarObligatorio.isSelected();
+        Field nuevo = pedirCampo(nombre, opcional, cbxModificarTipoCampo.getSelectedIndex());
+        if (nuevo == null) {
+            return;
+        }
+        campos.set(i, nuevo);
+        guardarCampos();
+        actualizarLista();
+        Lista_Campos.setSelectedIndex(i);
+    }//GEN-LAST:event_btnModificarCampoActionPerformed
+
+    private void btnEliminarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCampoActionPerformed
+        int i = Lista_Campos.getSelectedIndex();
+        if (i < 0) {
+            aviso("Seleccioná un campo de la lista");
+            return;
+        }
+        if (i == 0) {
+            aviso("No se puede borrar la llave primaria");
+            return;
+        }
+        if (JOptionPane.showConfirmDialog(this, "¿Borrar el campo " + campos.get(i).getName() + "?",
+                "Confirmar", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+            return;
+        }
+        campos.remove(i);
+        guardarCampos();
+        actualizarLista();
+    }//GEN-LAST:event_btnEliminarCampoActionPerformed
+
+    private void Lista_CamposValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_Lista_CamposValueChanged
+        if (evt.getValueIsAdjusting()) {
+            return;
+        }
+        int i = Lista_Campos.getSelectedIndex();
+        if (i < 0 || i >= campos.size()) {
+            return;
+        }
+        Field f = campos.get(i);
+        txtModificarNombreCampo.setText(f.getName());
+        cbxModificarTipoCampo.setSelectedIndex(f.getFieldType());
+        chkModificarObligatorio.setSelected(!f.isOpcional());
+        cbxModificarTipoCampo.setEnabled(i != 0);
+        chkModificarObligatorio.setEnabled(i != 0);
+    }//GEN-LAST:event_Lista_CamposValueChanged
 
     /**
      * @param args the command line arguments
@@ -909,7 +1087,8 @@ public class GUI extends javax.swing.JFrame {
     }
     
     private void abrirArchivo(File file) {
-        
+        campos.clear();
+        actualizarLista();
         try {
             archivo_actual = Functions.isFileValid(file) ? file : null;
             //<editor-fold defaultstate="collapsed" desc="catch IO">
@@ -942,9 +1121,71 @@ public class GUI extends javax.swing.JFrame {
     }
     
     private void actualizarLista() {
-        
-        Field[] fields;
-        
+        modeloCampos.clear();
+        for (Field f : campos) {
+            modeloCampos.addElement(describir(f));
+        }
+    }
+    
+    private String describir(Field f) {
+    return f.getName() + "  [" + TIPOS[f.getFieldType()] + "]" + (f.isOpcional() ? "" : "  (obligatorio)");
+}
+
+    private void aviso(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
+
+    private void configurarSpinners() {
+        EnteroJSpinner.setModel(new SpinnerNumberModel(0, Integer.MIN_VALUE, Integer.MAX_VALUE, 1));
+        TextoSpinner.setModel(new SpinnerNumberModel(50, 1, 65535, 1));
+        DecimalSpinner1.setModel(new SpinnerNumberModel(10, 1, 18, 1));
+        DecimalSpinner2.setModel(new SpinnerNumberModel(2, 0, 10, 1));
+        FechaDiaSpinner.setModel(new SpinnerNumberModel(1, 1, 31, 1));
+        FechaMesSpinner.setModel(new SpinnerNumberModel(1, 1, 12, 1));
+        FechaAnioSpinner.setModel(new SpinnerNumberModel(2026, 1, 9999, 1));
+        FechaAnioSpinner.setEditor(new JSpinner.NumberEditor(FechaAnioSpinner, "#"));
+    }
+
+    private String validarNombre(String texto, int indiceIgnorado) {
+        String nombre = texto.trim();
+        if (nombre.isEmpty()) {
+            aviso("El nombre no puede estar vacío");
+            return null;
+        }
+        if (nombre.getBytes(StandardCharsets.UTF_8).length > 255) {
+            aviso("El nombre es demasiado largo");
+            return null;
+        }
+        for (int i = 0; i < campos.size(); i++) {
+            if (i != indiceIgnorado && campos.get(i).getName().equalsIgnoreCase(nombre)) {
+                aviso("Ya existe un campo con ese nombre");
+                return null;
+            }
+        }
+        return nombre;
+    }
+
+    private Field pedirCampo(String nombre, boolean opcional, int tipo) {
+        campoResultado = null;
+        nombrePendiente = nombre;
+        opcionalPendiente = opcional;
+        JDialog[] dialogos = {DialogEntero, DialogTexto, DialogFecha, DialogDecimal, DialogBoolean};
+        JDialog d = dialogos[tipo];
+        d.pack();
+        d.setLocationRelativeTo(this);
+        d.setVisible(true);
+        return campoResultado;
+    }
+
+    private void guardarCampos() {
+        if (archivo_actual == null) {
+            return;
+        }
+        try {
+            Functions.writeFieldMetadata(archivo_actual, campos.toArray(new Field[0]));
+        } catch (IOException ex) {
+            aviso("No se pudo guardar la metadata: " + ex.getMessage());
+        }
     }
     
     private void ocultarPaneles() {
@@ -971,7 +1212,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JSpinner EnteroJSpinner;
     private javax.swing.JButton FechaAceptar;
     private javax.swing.JSpinner FechaAnioSpinner;
-    private javax.swing.JSpinner FechaDíaSpinner;
+    private javax.swing.JSpinner FechaDiaSpinner;
     private javax.swing.JSpinner FechaMesSpinner;
     private javax.swing.JFileChooser File_Chooser;
     private javax.swing.JPanel Fondo;
@@ -998,6 +1239,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnVerCruce;
     private javax.swing.JComboBox<String> cbxModificarTipoCampo;
     private javax.swing.JComboBox<String> cbxTipoCampo;
+    private javax.swing.JCheckBox chkCrearObligatorio;
+    private javax.swing.JCheckBox chkModificarObligatorio;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
