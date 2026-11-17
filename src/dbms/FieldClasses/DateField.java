@@ -38,8 +38,10 @@ public class DateField extends Field {
     
     @Override
     public ByteBuffer[] wrapFieldData() {
+        
         total_size = 0;
-        ByteBuffer bb = ByteBuffer.allocate(sub_fixed_size);
+        
+        ByteBuffer bb = ByteBuffer.allocate(sub_fixed_size).position(0);
         bb.put(getFieldType());
         bb.put(day);
         bb.put(month);

@@ -5,6 +5,7 @@
 package dbms;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 
 /**
  *
@@ -18,7 +19,7 @@ public class Header {
     */
     private static final int FIXED_SIZE = 13;
     public static final byte[] SIGNATURE = {18, 84, -47, 21};
-    public static final short VERSION = 6;
+    public static final short VERSION = 7;
     
     private int av_head = -1;
     private short f_name_size;
@@ -26,7 +27,7 @@ public class Header {
     
     public Header(String file_name) {
         this.file_name = file_name;
-        this.f_name_size += (short)(this.file_name.getBytes().length + Short.MIN_VALUE);
+        this.f_name_size += (short)(this.file_name.getBytes(StandardCharsets.UTF_8).length + Short.MIN_VALUE);
     }
     
     public ByteBuffer wrap() {
@@ -41,7 +42,7 @@ public class Header {
         bb.putInt(av_head);
         bb.putShort(f_name_size);
         
-        bb.put(file_name.getBytes());
+        bb.put(file_name.getBytes(StandardCharsets.UTF_8));
         
         bb.put((byte)(-128));
         

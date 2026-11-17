@@ -5,6 +5,7 @@
 package dbms.FieldClasses;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 
 /**
  *
@@ -27,7 +28,7 @@ public abstract class Field {
 
     public Field(String name, boolean opt) throws IllegalArgumentException {
         
-        this.name_size = (byte)(name.getBytes().length + Byte.MIN_VALUE);
+        this.name_size = (byte)(name.getBytes(StandardCharsets.UTF_8).length + Byte.MIN_VALUE);
         
         if (name_size - Byte.MIN_VALUE > 256) {
             throw new IllegalArgumentException("Nombre muy grande");
@@ -44,7 +45,7 @@ public abstract class Field {
         ByteBuffer bb = ByteBuffer.allocate(FIXED_SIZE + (name_size - Byte.MIN_VALUE));
         bb.put(opt);
         bb.put(name_size);
-        bb.put(name.getBytes());
+        bb.put(name.getBytes(StandardCharsets.UTF_8));
         total_size += bb.capacity();
         return bb;
         

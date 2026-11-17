@@ -32,11 +32,13 @@ public class IntField extends Field {
     
     @Override
     public ByteBuffer[] wrapFieldData() {
+        
         total_size = 0;
-        ByteBuffer bb = ByteBuffer.allocate(sub_fixed_size);
+        
+        ByteBuffer bb = ByteBuffer.allocate(sub_fixed_size).position(0);
         bb.put(getFieldType());
         bb.putInt(dft_data);
-        total_size += bb.capacity() + Integer.BYTES;
+        total_size += bb.capacity();
         
         ByteBuffer gen_data_bb = getGeneralData();
         

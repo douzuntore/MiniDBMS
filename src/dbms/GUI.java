@@ -36,7 +36,9 @@ public class GUI extends javax.swing.JFrame {
      * Creates new form GUI
      */
     public GUI() {
+        
         initComponents();
+        
         archivo_actual = null;
         Lista_Campos.setModel(modeloCampos);
         configurarSpinners();
@@ -114,7 +116,6 @@ public class GUI extends javax.swing.JFrame {
         chkModificarObligatorio = new javax.swing.JCheckBox();
         jpEliminar = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btnEliminarCampo = new javax.swing.JButton();
@@ -469,11 +470,6 @@ public class GUI extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel3.setText("Campos :");
 
-        Lista_Campos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "1", "2" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         Lista_Campos.addListSelectionListener(this::Lista_CamposValueChanged);
 
         javax.swing.GroupLayout jpListarLayout = new javax.swing.GroupLayout(jpListar);
@@ -645,8 +641,6 @@ public class GUI extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         jLabel4.setText("Menu Campos");
 
-        jButton1.setText("Cambiar LLave Primaria");
-
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setText("Llave Primaria: ");
 
@@ -673,14 +667,11 @@ public class GUI extends javax.swing.JFrame {
                             .addGroup(jpCamposLayout.createSequentialGroup()
                                 .addGap(38, 38, 38)
                                 .addGroup(jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnEliminarCampo)
                                     .addGroup(jpCamposLayout.createSequentialGroup()
                                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jpCamposLayout.createSequentialGroup()
-                                        .addComponent(jButton1)
-                                        .addGap(56, 56, 56)
-                                        .addComponent(btnEliminarCampo)))))
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpListar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -698,9 +689,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
-                .addGroup(jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(btnEliminarCampo))
+                .addComponent(btnEliminarCampo)
                 .addGap(35, 35, 35))
         );
 
@@ -1088,7 +1077,6 @@ public class GUI extends javax.swing.JFrame {
     
     private void abrirArchivo(File file) {
         campos.clear();
-        actualizarLista();
         try {
             archivo_actual = Functions.isFileValid(file) ? file : null;
             //<editor-fold defaultstate="collapsed" desc="catch IO">
@@ -1099,17 +1087,28 @@ public class GUI extends javax.swing.JFrame {
         
         if (archivo_actual != null) {
             txtArchivoActual.setText(archivo_actual.getName());
+            try {
+                Field[] fields = Functions.getFieldsFromMetadata(archivo_actual);
+                for (int i = 0; i < fields.length; i++) {
+                    campos.add(fields[i]);
+                }
+                //<editor-fold defaultstate="collapsed" desc="catch IO">
+            } catch (IOException ex) {
+                System.getLogger(GUI.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                //</editor-fold>
+            }
         }
         else {
             txtArchivoActual.setText("[Archivo inválido!]");
         }
         
+        actualizarLista();
         actualizarBotones();
     }
     
     private void actualizarBotones() {
         
-        if (archivo_actual!=null) {
+        if (archivo_actual != null) {
             btnCampos.setEnabled(true);
             btnRegistros.setEnabled(true);
         }
@@ -1241,7 +1240,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxTipoCampo;
     private javax.swing.JCheckBox chkCrearObligatorio;
     private javax.swing.JCheckBox chkModificarObligatorio;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

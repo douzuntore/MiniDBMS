@@ -4,13 +4,14 @@
  */
 package dbms;
 
-import dbms.FieldClasses.Field;
+import dbms.FieldClasses.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
 
 /**
  *
@@ -102,11 +103,73 @@ public class Functions {
             position += bb.getShort() - Short.MIN_VALUE + Short.BYTES;
             //
             
-            byte field_amnt = (byte)(bb.get(position) - Byte.MIN_VALUE);
+            bb = ByteBuffer.allocate(Byte.BYTES).position(0);
+            fc.read(bb, position);
+            bb.rewind();
             position++;
+            byte field_amnt = (byte)(bb.get() - Byte.MIN_VALUE);
             Field[] fields = new Field[field_amnt];
             
-            // TODO doug doug
+            for (int i = 0; i < field_amnt; i++) {
+                
+                // leer longitud de bytes del campo
+                bb = ByteBuffer.allocate(Integer.BYTES);
+                fc.read(bb, position);
+                int bytes_campo = bb.rewind().getInt();
+                position += 4;
+                //
+                
+                // leer campo
+                bb = ByteBuffer.allocate(bytes_campo);
+                fc.read(bb, position);
+                bb.position(0);
+                // es obligatorio?
+                boolean opt = bb.get() == 01;
+                // nombre de campo
+                byte field_name_size = (byte)(bb.get() - Byte.MIN_VALUE);
+                byte[] string_buffer = new byte[field_name_size];
+                bb.get(string_buffer);
+                String name = new String(string_buffer, StandardCharsets.UTF_8);
+                // tipo de dato
+                byte type = bb.get();
+                
+                // lectura de datos dependiendo del tipo
+                Field new_field = null;
+                switch (type) {
+                    case 0:
+                        int dft_data_0 = bb.getInt();
+                        new_field = new IntField(name, opt, dft_data_0);
+                        break;
+                    case 1:
+                        short max_size = bb.getShort();
+                        short dft_val_size = (short)(bb.getShort() - Short.MIN_VALUE);
+                        byte[] dft_val_buffer = new byte[dft_val_size];
+                        bb.get(dft_val_buffer);
+                        String dft_data_1 = new String(dft_val_buffer, StandardCharsets.UTF_8);
+                        new_field = new TextField(name, opt, max_size, dft_data_1);
+                        break;
+                    case 2:
+                        byte day = bb.get();
+                        byte month = bb.get();
+                        short year = bb.getShort();
+                        new_field = new DateField(name, opt, year, month, day);
+                        break;
+                    case 3:
+                        int whole_p = bb.getInt();
+                        int rational_p = bb.getInt();
+                        new_field = new DecimalField(name, opt, whole_p, rational_p);
+                        break;
+                    case 4:
+                        byte dft_data_4 = bb.get();
+                        new_field = new BoolField(name, opt, dft_data_4 == 01);
+                        break;
+                }
+                
+                fields[i] = new_field;
+                
+                //reposicionar
+                position += bb.capacity();
+            }
             
             return fields;
             

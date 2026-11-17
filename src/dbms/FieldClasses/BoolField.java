@@ -31,16 +31,20 @@ public class BoolField extends Field {
 
     @Override
     public ByteBuffer[] wrapFieldData() {
+        
         total_size = 0;
-        ByteBuffer bb = ByteBuffer.allocate(sub_fixed_size);
+        
+        ByteBuffer bb = ByteBuffer.allocate(sub_fixed_size).position(0);
         bb.put(getFieldType());
         bb.put(dft_data);
-        total_size += bb.capacity() + Integer.BYTES;
+        
+        total_size += bb.capacity();
+        ByteBuffer size_bb = ByteBuffer.allocate(4).putInt(total_size);
         
         ByteBuffer gen_data_bb = getGeneralData();
         
         return new ByteBuffer[]{
-                ByteBuffer.allocate(4).putInt(total_size).rewind(),
+                size_bb.rewind(),
                 gen_data_bb.rewind(),
                 bb.rewind()
         };

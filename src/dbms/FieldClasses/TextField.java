@@ -5,6 +5,7 @@
 package dbms.FieldClasses;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 
 /**
  *
@@ -29,11 +30,11 @@ public class TextField extends Field {
         
         this.max_size = (short)(max_size + Short.MIN_VALUE);
         
-        if (data.length() > (max_size + 32768)) {
+        if (data.length() > (max_size - Short.MIN_VALUE)) {
             throw new IllegalArgumentException("Texto muy grande");
         }
         
-        dft_data_size = (short)(data.getBytes().length + Short.MIN_VALUE);
+        dft_data_size = (short)(data.getBytes(StandardCharsets.UTF_8).length + Short.MIN_VALUE);
         this.dft_data = data;
         
     }
@@ -45,18 +46,23 @@ public class TextField extends Field {
     
     @Override
     public ByteBuffer[] wrapFieldData() {
+        
         total_size = 0;
-        ByteBuffer bb = ByteBuffer.allocate(sub_fixed_size + (dft_data_size - Short.MIN_VALUE));
+        
+        ByteBuffer bb = ByteBuffer.allocate(sub_fixed_size + (dft_data_size - Short.MIN_VALUE)).position(0);
         bb.put(getFieldType());
         bb.putShort(max_size);
         bb.putShort(dft_data_size);
-        bb.put(dft_data.getBytes());
-        total_size += bb.capacity() + Integer.BYTES;
+        bb.put(dft_data.getBytes(StandardCharsets.UTF_8));
+        total_size += bb.capacity();
+        
         ByteBuffer gen_data_bb = getGeneralData();
+        
         return new ByteBuffer[]{
             ByteBuffer.allocate(4).putInt(total_size).rewind(),
             gen_data_bb.rewind(),
             bb.rewind()
         };
+        
     }
 }
