@@ -19,10 +19,16 @@ public class DateField extends Field {
     private static final byte sub_fixed_size = 5;
     
     // datos escritos en encabezado !!
-    private int dft_data;
+    private byte day;
+    private byte month;
+    private short year;
 
     public DateField(String name, boolean opt, short year, byte month, byte day) {
         super(name, opt);
+        
+        this.day = day;
+        this.month = month;
+        this.year = year;
     }
     
     @Override
@@ -31,15 +37,21 @@ public class DateField extends Field {
     }
     
     @Override
-    public ByteBuffer[] wrapHeaderData() {
+    public ByteBuffer[] wrapFieldData() {
         
         ByteBuffer bb = ByteBuffer.allocate(sub_fixed_size);
         bb.put(getFieldType());
-        bb.putInt(dft_data);
+        bb.put(day);
+        bb.put(month);
+        bb.putShort(year);
+        total_size += bb.capacity() + Integer.BYTES;
+        
+        ByteBuffer gen_data_bb = getGeneralData();
         
         return new ByteBuffer[]{
-                getGeneralData(),
-                bb
+                ByteBuffer.allocate(4).putInt(total_size).rewind(),
+                gen_data_bb.rewind(),
+                bb.rewind()
         };
         
     }

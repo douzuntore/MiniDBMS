@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class GUI extends javax.swing.JFrame {
     
     private static final int version = 1;
-    static  File archivoActual =  new File("prueba.txt");
+    private static File archivo_actual =  new File("prueba.txt");
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUI.class.getName());
 
@@ -26,9 +26,9 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() {
         initComponents();
-       archivoActual = null;
-       ocultarPaneles();
-       actualizarBotones();
+        archivo_actual = null;
+        ocultarPaneles();
+        actualizarBotones();
     }
 
     /**
@@ -40,8 +40,9 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        File_Chooser = new javax.swing.JFileChooser();
         Fondo = new javax.swing.JPanel();
-        jpOpciones = new javax.swing.JPanel();
+        Panel_Opciones = new javax.swing.JPanel();
         Dec = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnCampos = new javax.swing.JToggleButton();
@@ -49,11 +50,11 @@ public class GUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtArchivoActual = new javax.swing.JTextField();
-        Menus = new javax.swing.JPanel();
+        Panel_Menus = new javax.swing.JPanel();
         jpCampos = new javax.swing.JPanel();
         jpListar = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jListCamposActuales = new javax.swing.JList<>();
+        Lista_Campos = new javax.swing.JList<>();
         jtpCampos = new javax.swing.JTabbedPane();
         jpCrearCampo = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -89,7 +90,7 @@ public class GUI extends javax.swing.JFrame {
         btnCargarRegistros = new javax.swing.JToggleButton();
         btnBorrarRegsitro = new javax.swing.JToggleButton();
         btnVerCruce = new javax.swing.JToggleButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        Menu_Bar = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
         jmiCrear = new javax.swing.JMenuItem();
         jmiAbrir = new javax.swing.JMenuItem();
@@ -102,7 +103,7 @@ public class GUI extends javax.swing.JFrame {
 
         Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jpOpciones.setBackground(new java.awt.Color(204, 204, 204));
+        Panel_Opciones.setBackground(new java.awt.Color(204, 204, 204));
 
         Dec.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -115,16 +116,16 @@ public class GUI extends javax.swing.JFrame {
         DecLayout.setHorizontalGroup(
             DecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DecLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         DecLayout.setVerticalGroup(
             DecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DecLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DecLayout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(14, 14, 14))
         );
 
         btnCampos.setText("Campos");
@@ -163,24 +164,24 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jpOpcionesLayout = new javax.swing.GroupLayout(jpOpciones);
-        jpOpciones.setLayout(jpOpcionesLayout);
-        jpOpcionesLayout.setHorizontalGroup(
-            jpOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout Panel_OpcionesLayout = new javax.swing.GroupLayout(Panel_Opciones);
+        Panel_Opciones.setLayout(Panel_OpcionesLayout);
+        Panel_OpcionesLayout.setHorizontalGroup(
+            Panel_OpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Dec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jpOpcionesLayout.createSequentialGroup()
+            .addGroup(Panel_OpcionesLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(jpOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Panel_OpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jpOpcionesLayout.createSequentialGroup()
+            .addGroup(Panel_OpcionesLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jpOpcionesLayout.setVerticalGroup(
-            jpOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpOpcionesLayout.createSequentialGroup()
+        Panel_OpcionesLayout.setVerticalGroup(
+            Panel_OpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_OpcionesLayout.createSequentialGroup()
                 .addComponent(Dec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(78, 78, 78)
                 .addComponent(btnCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,9 +191,9 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        Fondo.add(jpOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 680));
+        Fondo.add(Panel_Opciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 680));
 
-        Menus.setBackground(new java.awt.Color(153, 153, 153));
+        Panel_Menus.setBackground(new java.awt.Color(153, 153, 153));
 
         jpCampos.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -202,7 +203,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel3.setText("Campos :");
 
-        jListCamposActuales.setModel(new javax.swing.AbstractListModel<String>() {
+        Lista_Campos.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "1", "2" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
@@ -219,7 +220,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jpListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpListarLayout.createSequentialGroup()
                     .addContainerGap(27, Short.MAX_VALUE)
-                    .addComponent(jListCamposActuales, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Lista_Campos, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(28, Short.MAX_VALUE)))
         );
         jpListarLayout.setVerticalGroup(
@@ -231,7 +232,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jpListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpListarLayout.createSequentialGroup()
                     .addContainerGap(85, Short.MAX_VALUE)
-                    .addComponent(jListCamposActuales, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Lista_Campos, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(45, Short.MAX_VALUE)))
         );
 
@@ -274,7 +275,7 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(jpCrearCampoLayout.createSequentialGroup()
                         .addGap(204, 204, 204)
                         .addComponent(btnCrearCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCrearCampoLayout.createSequentialGroup()
                 .addGap(95, 95, 95)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,7 +336,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jpModificarCampoLayout.createSequentialGroup()
                 .addGap(122, 122, 122)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                 .addComponent(jLabel13)
                 .addGap(52, 52, 52))
             .addGroup(jpModificarCampoLayout.createSequentialGroup()
@@ -379,7 +380,7 @@ public class GUI extends javax.swing.JFrame {
         jpEliminar.setLayout(jpEliminarLayout);
         jpEliminarLayout.setHorizontalGroup(
             jpEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 557, Short.MAX_VALUE)
+            .addGap(0, 563, Short.MAX_VALUE)
         );
         jpEliminarLayout.setVerticalGroup(
             jpEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,8 +413,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCamposLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jtpCampos, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                        .addComponent(jtpCampos))
                     .addGroup(jpCamposLayout.createSequentialGroup()
                         .addGroup(jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpCamposLayout.createSequentialGroup()
@@ -430,7 +430,8 @@ public class GUI extends javax.swing.JFrame {
                                         .addComponent(jButton1)
                                         .addGap(56, 56, 56)
                                         .addComponent(btnEliminarCampo)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpListar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jpCamposLayout.setVerticalGroup(
@@ -545,26 +546,27 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
-        javax.swing.GroupLayout MenusLayout = new javax.swing.GroupLayout(Menus);
-        Menus.setLayout(MenusLayout);
-        MenusLayout.setHorizontalGroup(
-            MenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout Panel_MenusLayout = new javax.swing.GroupLayout(Panel_Menus);
+        Panel_Menus.setLayout(Panel_MenusLayout);
+        Panel_MenusLayout.setHorizontalGroup(
+            Panel_MenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jpCampos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(MenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_MenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jpRegistros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        MenusLayout.setVerticalGroup(
-            MenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        Panel_MenusLayout.setVerticalGroup(
+            Panel_MenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jpCampos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(MenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_MenusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jpRegistros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        Fondo.add(Menus, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 910, 680));
+        Fondo.add(Panel_Menus, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 910, 680));
 
         menuArchivo.setText("Archivo");
 
         jmiCrear.setText("Crear");
+        jmiCrear.addActionListener(this::jmiCrearActionPerformed);
         menuArchivo.add(jmiCrear);
 
         jmiAbrir.setText("Abrir");
@@ -575,14 +577,15 @@ public class GUI extends javax.swing.JFrame {
         menuArchivo.add(jmiGuardar);
 
         JMICerrar.setText("Cerrar");
+        JMICerrar.addActionListener(this::JMICerrarActionPerformed);
         menuArchivo.add(JMICerrar);
 
         JMISalir.setText("Salir");
         menuArchivo.add(JMISalir);
 
-        jMenuBar1.add(menuArchivo);
+        Menu_Bar.add(menuArchivo);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(Menu_Bar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -599,7 +602,7 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarRegistroActionPerformed
-      ;
+        
     }//GEN-LAST:event_btnBuscarRegistroActionPerformed
 
     private void btnRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrosActionPerformed
@@ -608,23 +611,68 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrosActionPerformed
 
     private void btnCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCamposActionPerformed
-         ocultarPaneles();
-         jpCampos.setVisible(true);
+        ocultarPaneles();
+        jpCampos.setVisible(true);
     }//GEN-LAST:event_btnCamposActionPerformed
 
     private void jmiAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAbrirActionPerformed
-        JFileChooser chooser = new JFileChooser();
-        chooser.setCurrentDirectory(new File("./"));
-        int resultado = chooser.showOpenDialog(this);
-        if (resultado == JFileChooser.APPROVE_OPTION ) {
-            archivoActual = chooser.getSelectedFile();
-            txtArchivoActual.setText(archivoActual.getName());
-        }else{
         
-            JOptionPane.showMessageDialog(this, "Hubo un error");
+        File_Chooser.setCurrentDirectory(new File("./"));
+        
+        if (File_Chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            
+            File f = File_Chooser.getSelectedFile();
+            
+            abrirArchivo(f);
+            
+        }
+        else {
+            
         }
         actualizarBotones();
     }//GEN-LAST:event_jmiAbrirActionPerformed
+
+    private void jmiCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCrearActionPerformed
+        // TODO add your handling code here:
+        
+        File_Chooser.setCurrentDirectory(new File("./"));
+        
+        if (File_Chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            
+            File f = File_Chooser.getSelectedFile();
+            
+            String file_name = f.getName();
+            if (file_name.contains(".")) {
+                file_name = file_name.split("\\.")[0];
+            }
+            File new_name = new File(file_name + ".disv");
+            new_name.delete();
+            f.renameTo(new_name);
+            
+            try {
+                // escritura de encabezado + llave primaria
+                Functions.writeHeader(f, new Header(file_name));
+                Field[] llave_primaria = {new IntField("llave_primaria", false, 0)};
+                Functions.writeFieldMetadata(f, llave_primaria);
+            //<editor-fold defaultstate="collapsed" desc="catch IO">
+            } catch (IOException ex) {
+                System.getLogger(GUI.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            //</editor-fold>
+            }
+            
+            abrirArchivo(f);
+            
+        }
+        
+        actualizarBotones();
+        
+    }//GEN-LAST:event_jmiCrearActionPerformed
+
+    private void JMICerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMICerrarActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_JMICerrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -651,17 +699,47 @@ public class GUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new GUI().setVisible(true));
     }
     
-    public void actualizarBotones(){
-        if (archivoActual!=null) {
+    private void abrirArchivo(File file) {
+        
+        try {
+            archivo_actual = Functions.isFileValid(file) ? file : null;
+            //<editor-fold defaultstate="collapsed" desc="catch IO">
+        } catch (IOException ex) {
+            System.getLogger(GUI.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            //</editor-fold>
+        }
+        
+        if (archivo_actual != null) {
+            txtArchivoActual.setText(archivo_actual.getName());
+        }
+        else {
+            txtArchivoActual.setText("[Archivo inválido!]");
+        }
+        
+        actualizarBotones();
+    }
+    
+    private void actualizarBotones() {
+        
+        if (archivo_actual!=null) {
             btnCampos.setEnabled(true);
             btnRegistros.setEnabled(true);
-        }else{
+        }
+        else {
             btnCampos.setEnabled(false);
             btnRegistros.setEnabled(false);
-            
         }
+        
     }
-    public void ocultarPaneles(){
+    
+    private void actualizarLista() {
+        
+        Field[] fields;
+        
+    }
+    
+    private void ocultarPaneles() {
+        
         jpRegistros.setVisible(false);
         jpCampos.setVisible(false);
     
@@ -669,11 +747,15 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Dec;
+    private javax.swing.JFileChooser File_Chooser;
     private javax.swing.JPanel Fondo;
     private javax.swing.JMenuItem JMICerrar;
     private javax.swing.JMenuItem JMISalir;
     private javax.swing.JTable JTRegistros;
-    private javax.swing.JPanel Menus;
+    private javax.swing.JList<String> Lista_Campos;
+    private javax.swing.JMenuBar Menu_Bar;
+    private javax.swing.JPanel Panel_Menus;
+    private javax.swing.JPanel Panel_Opciones;
     private javax.swing.JToggleButton btnBorrarRegsitro;
     private javax.swing.JButton btnBuscarRegistro;
     private javax.swing.JToggleButton btnCampos;
@@ -701,8 +783,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jListCamposActuales;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -714,7 +794,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jpEliminar;
     private javax.swing.JPanel jpListar;
     private javax.swing.JPanel jpModificarCampo;
-    private javax.swing.JPanel jpOpciones;
     private javax.swing.JPanel jpRegistros;
     private javax.swing.JSpinner jspCrearSizeCampo;
     private javax.swing.JSpinner jspModificarSizeCampo;

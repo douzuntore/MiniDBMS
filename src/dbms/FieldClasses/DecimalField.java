@@ -32,16 +32,20 @@ public class DecimalField extends Field {
     }
 
     @Override
-    public ByteBuffer[] wrapHeaderData() {
+    public ByteBuffer[] wrapFieldData() {
         
         ByteBuffer bb = ByteBuffer.allocate(sub_fixed_size);
         bb.put(getFieldType());
         bb.putInt(whole_p);
         bb.putInt(rational_p);
+        total_size += bb.capacity() + Integer.BYTES;
+        
+        ByteBuffer gen_data_bb = getGeneralData();
         
         return new ByteBuffer[]{
-                getGeneralData(),
-                bb
+                ByteBuffer.allocate(4).putInt(total_size).rewind(),
+                gen_data_bb.rewind(),
+                bb.rewind()
         };
         
     }

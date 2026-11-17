@@ -4,9 +4,7 @@
  */
 package dbms;
 
-import dbms.FieldClasses.Field;
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 
 /**
  *
@@ -18,45 +16,37 @@ public class Header {
     Estructura de header [elemento(b)]:
     tamaño(2) -> nombre_de_archivo(variable) -> versión(2) -> cabeza_avail_list(4)
     */
-    private static final int fixed_size = 12;
-    private static final short version = 1;
+    private static final int FIXED_SIZE = 13;
+    public static final byte[] SIGNATURE = {18, 84, -47, 21};
+    public static final short VERSION = 6;
     
     private int av_head = -1;
     private short f_name_size;
-    private char[] file_name;
-    
-    private ArrayList<Field> fields = new ArrayList<Field>();
+    private String file_name;
     
     public Header(String file_name) {
-        this.file_name = file_name.toCharArray();
-        this.f_name_size += (short)(this.file_name.length * 2);
-    }
-
-    public ArrayList<Field> getFields() {
-        return fields;
+        this.file_name = file_name;
+        this.f_name_size += (short)(this.file_name.getBytes().length + Short.MIN_VALUE);
     }
     
     public ByteBuffer wrap() {
         
-        ByteBuffer bb = ByteBuffer.allocate(fixed_size + 2*f_name_size);
+        int header_size = FIXED_SIZE + (f_name_size - Short.MIN_VALUE);
+        ByteBuffer bb = ByteBuffer.allocate(header_size);
         
         //escritura de firma
-        bb.put(new byte[]{18, 84, -47, 21});
+        bb.put(SIGNATURE);
+        bb.putShort(VERSION);
         
-        bb.putShort(version);
         bb.putInt(av_head);
         bb.putShort(f_name_size);
         
-        for (int i = 0; i < file_name.length; i++) {
-            bb.putChar(file_name[i]);
-        }
+        bb.put(file_name.getBytes());
         
-        return bb;
+        bb.put((byte)(-128));
         
-    }
-    
-    public void addField(Field field) {
-        fields.add(field);
+        return bb.rewind();
+        
     }
     
 }

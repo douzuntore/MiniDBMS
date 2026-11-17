@@ -13,37 +13,38 @@ import java.nio.ByteBuffer;
 public abstract class Field {
     
     // datos que NO serán escritos en encabezado !!
-    private static final byte fixed_size = 2;
+    private static final byte FIXED_SIZE = 2;
     
     // datos escritos en encabezado !!
     protected byte opt;
+    protected int total_size = 0;
     protected byte name_size; //cantidad de caracteres; no bytes
-    protected char[] name;
+    protected String name;
     
-    public abstract ByteBuffer[] wrapHeaderData();
+    public abstract ByteBuffer[] wrapFieldData();
     protected abstract byte getFieldType();
 
     public Field(String name, boolean opt) throws IllegalArgumentException {
         
-        if (name.length() > 256) {
+        this.name_size = (byte)(name.getBytes().length + Byte.MIN_VALUE);
+        
+        if (name_size - Byte.MIN_VALUE > 256) {
             throw new IllegalArgumentException("Nombre muy grande");
         }
         
         this.opt = (byte)(opt ? 1 : 0);
         
-        this.name_size = (byte)(name.length() - 128);
-        this.name = name.toCharArray();
+        this.name = name;
         
     }
     
     protected ByteBuffer getGeneralData() {
         
-        ByteBuffer bb = ByteBuffer.allocate(fixed_size + 2*(name_size + 128));
+        ByteBuffer bb = ByteBuffer.allocate(FIXED_SIZE + (name_size - Byte.MIN_VALUE));
         bb.put(opt);
         bb.put(name_size);
-        for (int i = 0; i < name.length; i++) {
-            bb.putChar(name[i]);
-        }
+        bb.put(name.getBytes());
+        total_size += bb.capacity();
         return bb;
         
     }
