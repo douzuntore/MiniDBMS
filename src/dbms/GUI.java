@@ -1032,7 +1032,6 @@ public class GUI extends javax.swing.JFrame {
         txtModificarNombreCampo.setText(f.getName());
         cbxModificarTipoCampo.setSelectedIndex(f.getFieldType());
         chkModificarObligatorio.setSelected(!f.isOpcional());
-        txtModificarNombreCampo.setEnabled(i != 0);
         chkModificarObligatorio.setEnabled(i != 0);
     }//GEN-LAST:event_Lista_CamposValueChanged
 
