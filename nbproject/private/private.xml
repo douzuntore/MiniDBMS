@@ -3,15 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/douzu/ProjectosNetBeans/DBMS/src/dbms/GUI.java</file>
-            <file>file:/C:/Users/douzu/ProjectosNetBeans/DBMS/src/dbms/Header.java</file>
-            <file>file:/C:/Users/douzu/ProjectosNetBeans/DBMS/src/dbms/Functions.java</file>
-            <file>file:/C:/Users/douzu/ProjectosNetBeans/DBMS/src/dbms/FieldClasses/IntField.java</file>
-            <file>file:/C:/Users/douzu/ProjectosNetBeans/DBMS/src/dbms/FieldClasses/Field.java</file>
-            <file>file:/C:/Users/douzu/ProjectosNetBeans/DBMS/src/dbms/FieldClasses/TextField.java</file>
-            <file>file:/C:/Users/douzu/ProjectosNetBeans/DBMS/src/dbms/FieldClasses/DecimalField.java</file>
-            <file>file:/C:/Users/douzu/ProjectosNetBeans/DBMS/src/dbms/FieldClasses/BoolField.java</file>
-            <file>file:/C:/Users/douzu/ProjectosNetBeans/DBMS/src/dbms/FieldClasses/DateField.java</file>
+            <file>file:/C:/Users/USERS/Desktop/DanUnitec/ProyectoEstruII/MiniDBMS/src/dbms/GUI.java</file>
+            <file>file:/C:/Users/USERS/Desktop/DanUnitec/ProyectoEstruII/MiniDBMS/src/dbms/Functions.java</file>
+            <file>file:/C:/Users/USERS/Desktop/DanUnitec/ProyectoEstruII/MiniDBMS/src/dbms/Header.java</file>
+            <file>file:/C:/Users/USERS/Desktop/DanUnitec/ProyectoEstruII/MiniDBMS/src/dbms/FieldClasses/DateField.java</file>
         </group>
     </open-files>
 </project-private>
