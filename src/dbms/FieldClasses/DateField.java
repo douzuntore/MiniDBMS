@@ -26,6 +26,16 @@ public class DateField extends Field {
     public DateField(String name, boolean opt, short year, byte month, byte day) {
         super(name, opt);
         
+        if (day < 0 || day > 31) {
+            throw new IllegalArgumentException("Dia fuera de rango");
+        }
+        if (month < 0 || month > 12) {
+            throw new IllegalArgumentException("Mes fuera de rango");
+        }
+        if (month <= 0 || month > Short.MAX_VALUE) {
+            throw new IllegalArgumentException("Mes fuera de rango");
+        }
+        
         this.day = day;
         this.month = month;
         this.year = year;
@@ -45,7 +55,7 @@ public class DateField extends Field {
         bb.put(getFieldType());
         bb.put(day);
         bb.put(month);
-        bb.putShort(year);
+        bb.putShort((short)(year + Short.MIN_VALUE));
         total_size += bb.capacity() + Integer.BYTES;
         
         ByteBuffer gen_data_bb = getGeneralData();

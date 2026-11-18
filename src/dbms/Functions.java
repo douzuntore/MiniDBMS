@@ -151,7 +151,7 @@ public class Functions {
                     case 2:
                         byte day = bb.get();
                         byte month = bb.get();
-                        short year = bb.getShort();
+                        short year = (short)(bb.getShort() - Short.MIN_VALUE);
                         new_field = new DateField(name, opt, year, month, day);
                         break;
                     case 3:

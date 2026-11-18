@@ -22,7 +22,6 @@ import javax.swing.SpinnerNumberModel;
  */
 public class GUI extends javax.swing.JFrame {
     
-    private static final int version = 1;
     private static File archivo_actual =  new File("prueba.txt");
     private final ArrayList<Field> campos = new ArrayList<>();
     private final DefaultListModel<String> modeloCampos = new DefaultListModel<>();
@@ -114,7 +113,6 @@ public class GUI extends javax.swing.JFrame {
         cbxModificarTipoCampo = new javax.swing.JComboBox<>();
         btnModificarCampo = new javax.swing.JButton();
         chkModificarObligatorio = new javax.swing.JCheckBox();
-        jpEliminar = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -623,21 +621,6 @@ public class GUI extends javax.swing.JFrame {
 
         jtpCampos.addTab("Modificar", jpModificarCampo);
 
-        jpEliminar.setBackground(new java.awt.Color(153, 153, 153));
-
-        javax.swing.GroupLayout jpEliminarLayout = new javax.swing.GroupLayout(jpEliminar);
-        jpEliminar.setLayout(jpEliminarLayout);
-        jpEliminarLayout.setHorizontalGroup(
-            jpEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 563, Short.MAX_VALUE)
-        );
-        jpEliminarLayout.setVerticalGroup(
-            jpEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
-        );
-
-        jtpCampos.addTab("Eliminar", jpEliminar);
-
         jLabel4.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         jLabel4.setText("Menu Campos");
 
@@ -671,7 +654,7 @@ public class GUI extends javax.swing.JFrame {
                                     .addGroup(jpCamposLayout.createSequentialGroup()
                                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpListar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -813,6 +796,7 @@ public class GUI extends javax.swing.JFrame {
         menuArchivo.add(jmiAbrir);
 
         jmiGuardar.setText("Guardar");
+        jmiGuardar.addActionListener(this::jmiGuardarActionPerformed);
         menuArchivo.add(jmiGuardar);
 
         JMICerrar.setText("Cerrar");
@@ -820,6 +804,7 @@ public class GUI extends javax.swing.JFrame {
         menuArchivo.add(JMICerrar);
 
         JMISalir.setText("Salir");
+        JMISalir.addActionListener(this::JMISalirActionPerformed);
         menuArchivo.add(JMISalir);
 
         Menu_Bar.add(menuArchivo);
@@ -865,9 +850,6 @@ public class GUI extends javax.swing.JFrame {
             abrirArchivo(f);
             
         }
-        else {
-            
-        }
         actualizarBotones();
     }//GEN-LAST:event_jmiAbrirActionPerformed
 
@@ -883,9 +865,15 @@ public class GUI extends javax.swing.JFrame {
             if (file_name.contains(".")) {
                 file_name = file_name.split("\\.")[0];
             }
-            f = new File(f.getParentFile(), file_name + ".disv");
+            File new_name = new File(f.getParent(), file_name + ".disv");
+            new_name.delete();
+            f = new_name;
+            
             Field[] llave_primaria = {new IntField("llave_primaria", false, 0)};
             try {
+                //creacion de archivo
+                f.createNewFile();
+                
                 // escritura de encabezado + llave primaria
                 Functions.writeHeader(f, new Header(file_name));
                 
@@ -897,10 +885,6 @@ public class GUI extends javax.swing.JFrame {
             }
             
             abrirArchivo(f);
-            if (archivo_actual != null) {
-                campos.add(llave_primaria[0]);
-                actualizarLista();
-            }
         }
         
         actualizarBotones();
@@ -908,8 +892,13 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiCrearActionPerformed
 
     private void JMICerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMICerrarActionPerformed
-        // TODO add your handling code here:
         
+        archivo_actual = null;
+        
+        aviso("Archivo cerrado exitosamente");
+        this.txtArchivoActual.setText("");
+        actualizarBotones();
+        ocultarPaneles();
         
     }//GEN-LAST:event_JMICerrarActionPerformed
 
@@ -989,7 +978,6 @@ public class GUI extends javax.swing.JFrame {
             return;
         }
         campos.add(nuevo);
-        guardarCampos();
         actualizarLista();
         txtCrearNombreCampo.setText("");
     }//GEN-LAST:event_btnCrearCampoActionPerformed
@@ -1010,7 +998,6 @@ public class GUI extends javax.swing.JFrame {
             return;
         }
         campos.set(i, nuevo);
-        guardarCampos();
         actualizarLista();
         Lista_Campos.setSelectedIndex(i);
     }//GEN-LAST:event_btnModificarCampoActionPerformed
@@ -1030,7 +1017,6 @@ public class GUI extends javax.swing.JFrame {
             return;
         }
         campos.remove(i);
-        guardarCampos();
         actualizarLista();
     }//GEN-LAST:event_btnEliminarCampoActionPerformed
 
@@ -1049,6 +1035,23 @@ public class GUI extends javax.swing.JFrame {
         cbxModificarTipoCampo.setEnabled(i != 0);
         chkModificarObligatorio.setEnabled(i != 0);
     }//GEN-LAST:event_Lista_CamposValueChanged
+
+    private void jmiGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGuardarActionPerformed
+        // TODO add your handling code here:
+        guardarCampos();
+        
+    }//GEN-LAST:event_jmiGuardarActionPerformed
+
+    private void JMISalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMISalirActionPerformed
+        // TODO add your handling code here:
+        if (archivo_actual != null) {
+            if (JOptionPane.showOptionDialog(this, "Desea guardar?", "", JOptionPane.YES_NO_OPTION, 0, null, new String[]{"Si", "No"}, 0) == 0) {
+                guardarCampos();
+            }
+        }
+        System.exit(0);
+        
+    }//GEN-LAST:event_JMISalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1124,11 +1127,12 @@ public class GUI extends javax.swing.JFrame {
         for (Field f : campos) {
             modeloCampos.addElement(describir(f));
         }
+        this.jLabel8.setText(describir(campos.get(0)));
     }
     
     private String describir(Field f) {
-    return f.getName() + "  [" + TIPOS[f.getFieldType()] + "]" + (f.isOpcional() ? "" : "  (obligatorio)");
-}
+        return f.getName() + "  [" + TIPOS[f.getFieldType()] + "]" + (f.isOpcional() ? "" : "  (obligatorio)");
+    }
 
     private void aviso(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
@@ -1178,6 +1182,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void guardarCampos() {
         if (archivo_actual == null) {
+            aviso("No hay un archivo cargado, intenta abrir uno!");
             return;
         }
         try {
@@ -1267,7 +1272,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiGuardar;
     private javax.swing.JPanel jpCampos;
     private javax.swing.JPanel jpCrearCampo;
-    private javax.swing.JPanel jpEliminar;
     private javax.swing.JPanel jpListar;
     private javax.swing.JPanel jpModificarCampo;
     private javax.swing.JPanel jpRegistros;
