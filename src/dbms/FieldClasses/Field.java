@@ -19,7 +19,7 @@ public abstract class Field {
     // datos escritos en encabezado !!
     protected byte opt;
     protected int total_size = 0;
-    protected byte name_size; //cantidad de caracteres; no bytes
+    protected byte name_size;
     protected String name;
     
     public abstract ByteBuffer[] wrapFieldData();
