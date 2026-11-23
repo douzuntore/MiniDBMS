@@ -55,6 +55,20 @@ public class Functions {
         return true;
     }
     
+    static void writeIndexHeader(File file, IndexHeader index_h) throws FileNotFoundException, IOException {
+        try (RandomAccessFile raf = new RandomAccessFile(file, "rw")) {
+            
+            FileChannel fc = raf.getChannel();
+            
+            int position = 0;
+            
+            ByteBuffer bb = index_h.wrap();
+            
+            fc.write(bb, position);                                 
+            
+        }
+    }
+    
     static void writeFieldMetadata(File file, Field[] fields) throws FileNotFoundException, IOException, IllegalArgumentException {
         try (RandomAccessFile raf = new RandomAccessFile(file, "rw")) {
             

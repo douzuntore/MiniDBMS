@@ -19,7 +19,7 @@ public class Header {
     */
     private static final int FIXED_SIZE = 13;
     public static final byte[] SIGNATURE = {18, 84, -47, 21};
-    public static final short VERSION = 7;
+    public static final short VERSION = 9;
     
     private int av_head = -1;
     private short f_name_size;

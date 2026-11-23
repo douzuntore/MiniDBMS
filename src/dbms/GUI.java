@@ -22,7 +22,7 @@ import javax.swing.SpinnerNumberModel;
  */
 public class GUI extends javax.swing.JFrame {
     
-    private static File archivo_actual =  new File("prueba.txt");
+    private static File archivo_actual;
     private final ArrayList<Field> campos = new ArrayList<>();
     private final DefaultListModel<String> modeloCampos = new DefaultListModel<>();
     private static final String[] TIPOS = {"Entero", "Texto", "Fecha", "Decimal", "Booleano"};
@@ -437,8 +437,6 @@ public class GUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 102));
 
-        Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         Panel_Opciones.setBackground(new java.awt.Color(204, 204, 204));
 
         Dec.setBackground(new java.awt.Color(102, 102, 102));
@@ -522,11 +520,9 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(btnCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 283, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        Fondo.add(Panel_Opciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 680));
 
         Panel_Menus.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -739,7 +735,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jtpCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addComponent(btnEliminarCampo)
@@ -820,7 +816,7 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(jpRegistrosLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(btnCargarRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jpRegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpRegistrosLayout.createSequentialGroup()
                         .addGroup(jpRegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -853,7 +849,20 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jpRegistros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        Fondo.add(Panel_Menus, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 910, 680));
+        javax.swing.GroupLayout FondoLayout = new javax.swing.GroupLayout(Fondo);
+        Fondo.setLayout(FondoLayout);
+        FondoLayout.setHorizontalGroup(
+            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FondoLayout.createSequentialGroup()
+                .addComponent(Panel_Opciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(Panel_Menus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        FondoLayout.setVerticalGroup(
+            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Panel_Opciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(Panel_Menus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         menuArchivo.setText("Archivo");
 
@@ -935,17 +944,28 @@ public class GUI extends javax.swing.JFrame {
             if (file_name.contains(".")) {
                 file_name = file_name.split("\\.")[0];
             }
-            File new_name = new File(f.getParent(), file_name + ".disv");
+            File new_name = new File(f.getParent(), file_name + ".mtdt");
             new_name.delete();
             f = new_name;
+            
+            File index_f = new File(f.getParent(), file_name + ".indx");
+            index_f.delete();
+            
+            File rec_f = new File(f.getParent(), file_name + ".dat");
+            rec_f.delete();
             
             Field[] llave_primaria = {new IntField("llave_primaria", false, 0)};
             try {
                 //creacion de archivo
                 f.createNewFile();
+                index_f.createNewFile();
+                rec_f.createNewFile();
                 
                 // escritura de encabezado + llave primaria
                 Functions.writeHeader(f, new Header(file_name));
+                
+                // escritura de encabezado de indice
+                Functions.writeIndexHeader(index_f, new IndexHeader(file_name, llave_primaria[0], true));
                 
                 Functions.writeFieldMetadata(f, llave_primaria);
             //<editor-fold defaultstate="collapsed" desc="catch IO">
@@ -1004,18 +1024,17 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_TextoAceptarActionPerformed
 
     private void DecimalAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DecimalAceptarActionPerformed
-       int enteros = (int) DecimalPdEntero.getValue();
-       int decimales = (int) DecimalPdDecimal.getValue();
        
        String defecto = DecimaltxtField.getText().trim();
        if (!defecto.isEmpty()) {
            try {
                Double.parseDouble(defecto);
            } catch (NumberFormatException ex) {
-               JOptionPane.showMessageDialog(DialogDecimal, "El valor por defecto no es un número válido");
+               aviso("El valor por defecto no es un número válido");
                return;
            }
-       }else{
+       }
+       else {
            return;
        }
        campoResultado = new DecimalField(nombrePendiente, opcionalPendiente, Double.parseDouble(defecto));
@@ -1156,7 +1175,17 @@ public class GUI extends javax.swing.JFrame {
     }
     
     private void abrirArchivo(File file) {
+        
+        //ir al archivo .mtdt
+        String file_name = file.getName();
+        if (file_name.contains(".")) {
+            file_name = file_name.split("\\.")[0];
+        }
+        file = new File(file.getParent(), file_name + ".mtdt");
+        //
+        
         campos.clear();
+        
         try {
             archivo_actual = Functions.isFileValid(file) ? file : null;
             //<editor-fold defaultstate="collapsed" desc="catch IO">
@@ -1164,7 +1193,7 @@ public class GUI extends javax.swing.JFrame {
             System.getLogger(GUI.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             //</editor-fold>
         }
-        
+
         if (archivo_actual != null) {
             txtArchivoActual.setText(archivo_actual.getName());
             try {

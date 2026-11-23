@@ -31,7 +31,7 @@ public class TextField extends Field {
         this.max_size = (short)(max_size + Short.MIN_VALUE);
         
         //if (data.length() > (max_size - Short.MIN_VALUE)) {
-        if (data.getBytes(StandardCharsets.UTF_8).length > max_size ) {
+        if (data.getBytes(StandardCharsets.UTF_8).length > max_size) {
             throw new IllegalArgumentException("Texto muy grande");
         }
         
