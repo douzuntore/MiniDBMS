@@ -60,17 +60,23 @@ public class GUI extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         EnteroJSpinner = new javax.swing.JSpinner();
         EnteroAceptar = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
         DialogTexto = new javax.swing.JDialog();
         jLabel14 = new javax.swing.JLabel();
         TextoSpinner = new javax.swing.JSpinner();
         TextotxtField = new javax.swing.JTextField();
         TextoAceptar = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         DialogDecimal = new javax.swing.JDialog();
         jLabel15 = new javax.swing.JLabel();
-        DecimalSpinner1 = new javax.swing.JSpinner();
-        DecimalSpinner2 = new javax.swing.JSpinner();
+        DecimalPdEntero = new javax.swing.JSpinner();
+        DecimalPdDecimal = new javax.swing.JSpinner();
         DecimaltxtField = new javax.swing.JTextField();
         DecimalAceptar = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
         DialogFecha = new javax.swing.JDialog();
         jLabel16 = new javax.swing.JLabel();
         FechaDiaSpinner = new javax.swing.JSpinner();
@@ -80,10 +86,13 @@ public class GUI extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         FechaAceptar = new javax.swing.JButton();
+        jLabel27 = new javax.swing.JLabel();
         DialogBoolean = new javax.swing.JDialog();
         jLabel20 = new javax.swing.JLabel();
         BooleandoTFCmbBox = new javax.swing.JComboBox<>();
         BooleanoAceptar = new javax.swing.JButton();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
         Fondo = new javax.swing.JPanel();
         Panel_Opciones = new javax.swing.JPanel();
         Dec = new javax.swing.JPanel();
@@ -145,21 +154,25 @@ public class GUI extends javax.swing.JFrame {
         EnteroAceptar.setText("Aceptar");
         EnteroAceptar.addActionListener(this::EnteroAceptarActionPerformed);
 
+        jLabel9.setText("Valor por defecto:");
+
         javax.swing.GroupLayout DialogEnteroLayout = new javax.swing.GroupLayout(DialogEntero.getContentPane());
         DialogEntero.getContentPane().setLayout(DialogEnteroLayout);
         DialogEnteroLayout.setHorizontalGroup(
             DialogEnteroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DialogEnteroLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel13)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(DialogEnteroLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(EnteroAceptar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(DialogEnteroLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(EnteroJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(DialogEnteroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DialogEnteroLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel13))
+                    .addGroup(DialogEnteroLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(DialogEnteroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(EnteroJSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(DialogEnteroLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(EnteroAceptar)))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         DialogEnteroLayout.setVerticalGroup(
@@ -167,11 +180,13 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(DialogEnteroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel13)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(EnteroJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(EnteroAceptar)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
         );
 
         DialogTexto.setModal(true);
@@ -183,6 +198,10 @@ public class GUI extends javax.swing.JFrame {
 
         TextoAceptar.setText("Aceptar");
         TextoAceptar.addActionListener(this::TextoAceptarActionPerformed);
+
+        jLabel21.setText("Texto por defecto:");
+
+        jLabel22.setText("Tamaño de campo:");
 
         javax.swing.GroupLayout DialogTextoLayout = new javax.swing.GroupLayout(DialogTexto.getContentPane());
         DialogTexto.getContentPane().setLayout(DialogTextoLayout);
@@ -197,7 +216,9 @@ public class GUI extends javax.swing.JFrame {
                         .addGap(19, 19, 19)
                         .addGroup(DialogTextoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(TextotxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TextoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(TextoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(134, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DialogTextoLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -209,13 +230,17 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(DialogTextoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel14)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TextoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel21)
+                .addGap(2, 2, 2)
                 .addComponent(TextotxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TextoAceptar)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         DialogDecimal.setModal(true);
@@ -223,8 +248,16 @@ public class GUI extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel15.setText("Decimal");
 
+        DecimaltxtField.addActionListener(this::DecimaltxtFieldActionPerformed);
+
         DecimalAceptar.setText("Aceptar");
         DecimalAceptar.addActionListener(this::DecimalAceptarActionPerformed);
+
+        jLabel23.setText("Valor por defecto:");
+
+        jLabel24.setText("Parte entera:");
+
+        jLabel25.setText("Parte decimal:");
 
         javax.swing.GroupLayout DialogDecimalLayout = new javax.swing.GroupLayout(DialogDecimal.getContentPane());
         DialogDecimal.getContentPane().setLayout(DialogDecimalLayout);
@@ -234,34 +267,53 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(DialogDecimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DialogDecimalLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel15))
+                        .addGroup(DialogDecimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addGroup(DialogDecimalLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(DialogDecimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                                    .addGroup(DialogDecimalLayout.createSequentialGroup()
+                                        .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
                     .addGroup(DialogDecimalLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(DecimalSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(DecimalSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DialogDecimalLayout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(DecimaltxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DialogDecimalLayout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addComponent(DecimalAceptar)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addGroup(DialogDecimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(DialogDecimalLayout.createSequentialGroup()
+                                .addGap(109, 109, 109)
+                                .addComponent(DecimalAceptar))
+                            .addGroup(DialogDecimalLayout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addComponent(DecimaltxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(DialogDecimalLayout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(DecimalPdEntero, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(DialogDecimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(DecimalPdDecimal, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(24, 24, 24))
         );
         DialogDecimalLayout.setVerticalGroup(
             DialogDecimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DialogDecimalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel15)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(DialogDecimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DecimalSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DecimalSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(DecimaltxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel25))
+                .addGap(7, 7, 7)
+                .addGroup(DialogDecimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DecimalPdEntero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DecimalPdDecimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addComponent(DecimalAceptar)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(DecimaltxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
 
         DialogFecha.setModal(true);
@@ -278,6 +330,8 @@ public class GUI extends javax.swing.JFrame {
         FechaAceptar.setText("Aceptar");
         FechaAceptar.addActionListener(this::FechaAceptarActionPerformed);
 
+        jLabel27.setText("fecha por defecto:");
+
         javax.swing.GroupLayout DialogFechaLayout = new javax.swing.GroupLayout(DialogFecha.getContentPane());
         DialogFecha.getContentPane().setLayout(DialogFechaLayout);
         DialogFechaLayout.setHorizontalGroup(
@@ -288,29 +342,34 @@ public class GUI extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel16))
                     .addGroup(DialogFechaLayout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(FechaAceptar))
+                    .addGroup(DialogFechaLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(FechaDiaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel17))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(FechaMesSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel18))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel19)
-                            .addComponent(FechaAnioSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(DialogFechaLayout.createSequentialGroup()
-                        .addGap(141, 141, 141)
-                        .addComponent(FechaAceptar)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                            .addGroup(DialogFechaLayout.createSequentialGroup()
+                                .addGroup(DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(FechaDiaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel17))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(FechaMesSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel18))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel19)
+                                    .addComponent(FechaAnioSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         DialogFechaLayout.setVerticalGroup(
             DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DialogFechaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(DialogFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(jLabel18)
@@ -320,9 +379,9 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(FechaDiaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FechaMesSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FechaAnioSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addComponent(FechaAceptar)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
 
         DialogBoolean.setModal(true);
@@ -335,34 +394,45 @@ public class GUI extends javax.swing.JFrame {
         BooleanoAceptar.setText("Aceptar");
         BooleanoAceptar.addActionListener(this::BooleanoAceptarActionPerformed);
 
+        jLabel28.setText("valor por defecto:");
+
         javax.swing.GroupLayout DialogBooleanLayout = new javax.swing.GroupLayout(DialogBoolean.getContentPane());
         DialogBoolean.getContentPane().setLayout(DialogBooleanLayout);
         DialogBooleanLayout.setHorizontalGroup(
             DialogBooleanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DialogBooleanLayout.createSequentialGroup()
-                .addGroup(DialogBooleanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(DialogBooleanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(DialogBooleanLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel20))
-                    .addGroup(DialogBooleanLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(BooleandoTFCmbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DialogBooleanLayout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(BooleanoAceptar)))
-                .addContainerGap(90, Short.MAX_VALUE))
+                        .addComponent(BooleandoTFCmbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(84, 84, 84))
+                    .addGroup(DialogBooleanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(DialogBooleanLayout.createSequentialGroup()
+                            .addGap(63, 63, 63)
+                            .addComponent(BooleanoAceptar))
+                        .addGroup(DialogBooleanLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(DialogBooleanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(DialogBooleanLayout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel20)))))
+                .addContainerGap())
         );
         DialogBooleanLayout.setVerticalGroup(
             DialogBooleanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DialogBooleanLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel20)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(BooleandoTFCmbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BooleanoAceptar)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addGap(39, 39, 39))
         );
+
+        jLabel26.setText("Valor por defecto:");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 102));
@@ -918,6 +988,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void TextoAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoAceptarActionPerformed
         int max = (int) TextoSpinner.getValue();
+        if(max<=0) return; 
         String defecto = TextotxtField.getText();
         if (defecto.getBytes(StandardCharsets.UTF_8).length > max) {
             JOptionPane.showMessageDialog(DialogTexto, "El valor por defecto excede la longitud máxima");
@@ -933,8 +1004,9 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_TextoAceptarActionPerformed
 
     private void DecimalAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DecimalAceptarActionPerformed
-       int enteros = (int) DecimalSpinner1.getValue();
-       int decimales = (int) DecimalSpinner2.getValue();
+       int enteros = (int) DecimalPdEntero.getValue();
+       int decimales = (int) DecimalPdDecimal.getValue();
+       
        String defecto = DecimaltxtField.getText().trim();
        if (!defecto.isEmpty()) {
            try {
@@ -943,8 +1015,10 @@ public class GUI extends javax.swing.JFrame {
                JOptionPane.showMessageDialog(DialogDecimal, "El valor por defecto no es un número válido");
                return;
            }
+       }else{
+           return;
        }
-       campoResultado = new DecimalField(nombrePendiente, opcionalPendiente, enteros, decimales);
+       campoResultado = new DecimalField(nombrePendiente, opcionalPendiente, Double.parseDouble(defecto));
        DialogDecimal.setVisible(false);
     }//GEN-LAST:event_DecimalAceptarActionPerformed
 
@@ -1052,6 +1126,10 @@ public class GUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_JMISalirActionPerformed
 
+    private void DecimaltxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DecimaltxtFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DecimaltxtFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1102,6 +1180,7 @@ public class GUI extends javax.swing.JFrame {
         }
         else {
             txtArchivoActual.setText("[Archivo inválido!]");
+            return;//evitar ejevutar actualizar tabla(si se ahce causa out of bounds)
         }
         
         actualizarLista();
@@ -1140,8 +1219,8 @@ public class GUI extends javax.swing.JFrame {
     private void configurarSpinners() {
         EnteroJSpinner.setModel(new SpinnerNumberModel(0, Integer.MIN_VALUE, Integer.MAX_VALUE, 1));
         TextoSpinner.setModel(new SpinnerNumberModel(50, 1, 65535, 1));
-        DecimalSpinner1.setModel(new SpinnerNumberModel(10, 1, 18, 1));
-        DecimalSpinner2.setModel(new SpinnerNumberModel(2, 0, 10, 1));
+        DecimalPdEntero.setModel(new SpinnerNumberModel(10, 1, 18, 1));
+        DecimalPdDecimal.setModel(new SpinnerNumberModel(2, 0, 10, 1));
         FechaDiaSpinner.setModel(new SpinnerNumberModel(1, 1, 31, 1));
         FechaMesSpinner.setModel(new SpinnerNumberModel(1, 1, 12, 1));
         FechaAnioSpinner.setModel(new SpinnerNumberModel(2026, 1, 9999, 1));
@@ -1203,8 +1282,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton BooleanoAceptar;
     private javax.swing.JPanel Dec;
     private javax.swing.JButton DecimalAceptar;
-    private javax.swing.JSpinner DecimalSpinner1;
-    private javax.swing.JSpinner DecimalSpinner2;
+    private javax.swing.JSpinner DecimalPdDecimal;
+    private javax.swing.JSpinner DecimalPdEntero;
     private javax.swing.JTextField DecimaltxtField;
     private javax.swing.JDialog DialogBoolean;
     private javax.swing.JDialog DialogDecimal;
@@ -1257,12 +1336,21 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

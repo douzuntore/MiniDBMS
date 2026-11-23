@@ -34,7 +34,7 @@ public class Functions {
     }
     
     static boolean isFileValid(File file) throws FileNotFoundException, IOException {
-        try (RandomAccessFile raf = new RandomAccessFile(file, "rw")) {
+        try (RandomAccessFile raf = new RandomAccessFile(file, "r")) {//solo r
             
             FileChannel fc = raf.getChannel();
             
@@ -44,6 +44,8 @@ public class Functions {
             ByteBuffer bb = ByteBuffer.allocate(6);
             bb.put(Header.SIGNATURE);
             bb.putShort(Header.VERSION);
+            file_bb.flip();//regresa a la posicion 0 el buffer
+            bb.flip();
             
             if (file_bb.compareTo(bb) != 0) {
                 return false;
@@ -141,8 +143,8 @@ public class Functions {
                         new_field = new IntField(name, opt, dft_data_0);
                         break;
                     case 1:
-                        short max_size = bb.getShort();
-                        short dft_val_size = (short)(bb.getShort() - Short.MIN_VALUE);
+                        int max_size = bb.getShort() - Short.MIN_VALUE;
+                        int dft_val_size = bb.getShort() - Short.MIN_VALUE;
                         byte[] dft_val_buffer = new byte[dft_val_size];
                         bb.get(dft_val_buffer);
                         String dft_data_1 = new String(dft_val_buffer, StandardCharsets.UTF_8);
@@ -155,9 +157,10 @@ public class Functions {
                         new_field = new DateField(name, opt, year, month, day);
                         break;
                     case 3:
-                        int whole_p = bb.getInt();
-                        int rational_p = bb.getInt();
-                        new_field = new DecimalField(name, opt, whole_p, rational_p);
+//                        int whole_p = bb.getInt();
+//                        int rational_p = bb.getInt();
+                        double dft = bb.getDouble();
+                        new_field = new DecimalField(name, opt, dft);
                         break;
                     case 4:
                         byte dft_data_4 = bb.get();
