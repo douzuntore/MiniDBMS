@@ -34,6 +34,7 @@ public class Header {
         
         int header_size = FIXED_SIZE + (f_name_size - Short.MIN_VALUE);
         ByteBuffer bb = ByteBuffer.allocate(header_size);
+       
         
         //escritura de firma
         bb.put(SIGNATURE);

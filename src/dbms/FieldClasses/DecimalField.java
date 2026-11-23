@@ -18,6 +18,8 @@ public class DecimalField extends Field {
     // datos escritos en encabezado !!
     private int whole_p;
     private int rational_p;
+    //cambios jafeth
+    private double dft_data;
 
     public DecimalField(String name, boolean opt, int whole_p, int rational_p) {
         super(name, opt);
@@ -25,6 +27,13 @@ public class DecimalField extends Field {
         this.whole_p = whole_p;
         this.rational_p = rational_p;
     }
+
+    public DecimalField(String name,  boolean opt, double dft_data) throws IllegalArgumentException {
+        super(name, opt);
+        this.dft_data = dft_data;
+    }
+    
+    
     
     @Override
     public byte getFieldType() {
@@ -38,8 +47,9 @@ public class DecimalField extends Field {
         
         ByteBuffer bb = ByteBuffer.allocate(sub_fixed_size).position(0);
         bb.put(getFieldType());
-        bb.putInt(whole_p);
-        bb.putInt(rational_p);
+        bb.putDouble(dft_data);
+//        bb.putInt(whole_p);
+//        bb.putInt(rational_p);
         total_size += bb.capacity();
         
         ByteBuffer gen_data_bb = getGeneralData();
