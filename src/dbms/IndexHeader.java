@@ -2,6 +2,7 @@ package dbms;
 
 import dbms.FieldClasses.Field;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -57,12 +58,12 @@ public class IndexHeader {
         ByteBuffer bb = ByteBuffer.allocate(header_size);
         
         bb.putShort(f_name_size);
-        bb.put(file_name.getBytes());
+        bb.put(file_name.getBytes(StandardCharsets.UTF_8));
         
         bb.put(order);
                 
         bb.put(field_size);
-        bb.put(field_name.getBytes());
+        bb.put(field_name.getBytes(StandardCharsets.UTF_8));
         
         bb.put((byte)(is_unique ? 1 : 0));
         

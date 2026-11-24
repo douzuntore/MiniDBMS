@@ -107,10 +107,11 @@ public class GUI extends javax.swing.JFrame {
         jpListar = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         Lista_Campos = new javax.swing.JList<>();
+        jLabel30 = new javax.swing.JLabel();
         jtpCampos = new javax.swing.JTabbedPane();
         jpCrearCampo = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        btnCrearCampo = new javax.swing.JButton();
+        Btn_Def_Valores = new javax.swing.JButton();
         txtCrearNombreCampo = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         cbxTipoCampo = new javax.swing.JComboBox<>();
@@ -534,20 +535,29 @@ public class GUI extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel3.setText("Campos :");
 
+        Lista_Campos.setFixedCellHeight(25);
         Lista_Campos.addListSelectionListener(this::Lista_CamposValueChanged);
+
+        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dbms/key.jpg"))); // NOI18N
+        jLabel30.setText("jLabel30");
 
         javax.swing.GroupLayout jpListarLayout = new javax.swing.GroupLayout(jpListar);
         jpListar.setLayout(jpListarLayout);
         jpListarLayout.setHorizontalGroup(
             jpListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpListarLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jpListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpListarLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpListarLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(137, Short.MAX_VALUE))
             .addGroup(jpListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpListarLayout.createSequentialGroup()
-                    .addContainerGap(27, Short.MAX_VALUE)
-                    .addComponent(Lista_Campos, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(36, Short.MAX_VALUE)
+                    .addComponent(Lista_Campos, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(28, Short.MAX_VALUE)))
         );
         jpListarLayout.setVerticalGroup(
@@ -555,6 +565,8 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jpListarLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel3)
+                .addGap(46, 46, 46)
+                .addComponent(jLabel30)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jpListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpListarLayout.createSequentialGroup()
@@ -568,15 +580,15 @@ public class GUI extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jLabel6.setText("Nombre:");
 
-        btnCrearCampo.setText("Crear");
-        btnCrearCampo.addActionListener(this::btnCrearCampoActionPerformed);
+        Btn_Def_Valores.setText("Inicializar valores por defecto");
+        Btn_Def_Valores.addActionListener(this::Btn_Def_ValoresActionPerformed);
 
         jLabel10.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel10.setText("Tipo");
+        jLabel10.setText("Tipo de dato");
 
         cbxTipoCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Entero", "Texto", "Fecha", "Decimal", "Booleano" }));
 
-        chkCrearObligatorio.setText("Obligatorio");
+        chkCrearObligatorio.setText("Es obligatorio?");
         chkCrearObligatorio.addActionListener(this::chkCrearObligatorioActionPerformed);
 
         javax.swing.GroupLayout jpCrearCampoLayout = new javax.swing.GroupLayout(jpCrearCampo);
@@ -586,42 +598,40 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jpCrearCampoLayout.createSequentialGroup()
                 .addGroup(jpCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCrearCampoLayout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(txtCrearNombreCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpCrearCampoLayout.createSequentialGroup()
                         .addGap(213, 213, 213)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpCrearCampoLayout.createSequentialGroup()
-                        .addGap(230, 230, 230)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(213, 213, 213)
+                        .addComponent(chkCrearObligatorio))
+                    .addGroup(jpCrearCampoLayout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(Btn_Def_Valores))
                     .addGroup(jpCrearCampoLayout.createSequentialGroup()
                         .addGap(189, 189, 189)
-                        .addComponent(cbxTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jpCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbxTipoCampo, 0, 133, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jpCrearCampoLayout.createSequentialGroup()
-                        .addGap(204, 204, 204)
-                        .addGroup(jpCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCrearCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jpCrearCampoLayout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(chkCrearObligatorio)))))
-                .addGap(80, 171, Short.MAX_VALUE))
+                        .addGap(131, 131, 131)
+                        .addComponent(txtCrearNombreCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(121, 175, Short.MAX_VALUE))
         );
         jpCrearCampoLayout.setVerticalGroup(
             jpCrearCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpCrearCampoLayout.createSequentialGroup()
                 .addGap(95, 95, 95)
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCrearNombreCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(44, 44, 44)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(chkCrearObligatorio)
                 .addGap(34, 34, 34)
-                .addComponent(btnCrearCampo)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addComponent(Btn_Def_Valores)
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         jtpCampos.addTab("Crear", jpCrearCampo);
@@ -632,11 +642,11 @@ public class GUI extends javax.swing.JFrame {
         jLabel11.setText("Nombre:");
 
         jLabel12.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel12.setText("Tipo");
+        jLabel12.setText("Tipo de dato");
 
         cbxModificarTipoCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Entero", "Texto", "Fecha", "Decimal", "Booleano" }));
 
-        btnModificarCampo.setText("Modificar");
+        btnModificarCampo.setText("Modificar valores por defecto");
         btnModificarCampo.addActionListener(this::btnModificarCampoActionPerformed);
 
         chkModificarObligatorio.setText("Obligatorio");
@@ -648,41 +658,41 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jpModificarCampoLayout.createSequentialGroup()
                 .addGroup(jpModificarCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpModificarCampoLayout.createSequentialGroup()
-                        .addGap(210, 210, 210)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(187, 187, 187)
+                        .addComponent(cbxModificarTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpModificarCampoLayout.createSequentialGroup()
-                        .addGap(132, 132, 132)
+                        .addGap(221, 221, 221)
+                        .addComponent(chkModificarObligatorio))
+                    .addGroup(jpModificarCampoLayout.createSequentialGroup()
+                        .addGap(195, 195, 195)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpModificarCampoLayout.createSequentialGroup()
+                        .addGap(164, 164, 164)
+                        .addComponent(btnModificarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpModificarCampoLayout.createSequentialGroup()
+                        .addGap(143, 143, 143)
                         .addComponent(txtModificarNombreCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpModificarCampoLayout.createSequentialGroup()
-                        .addGap(223, 223, 223)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpModificarCampoLayout.createSequentialGroup()
-                        .addGap(187, 187, 187)
-                        .addComponent(cbxModificarTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpModificarCampoLayout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addComponent(btnModificarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpModificarCampoLayout.createSequentialGroup()
-                        .addGap(211, 211, 211)
-                        .addComponent(chkModificarObligatorio)))
-                .addContainerGap(174, Short.MAX_VALUE))
+                        .addGap(221, 221, 221)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
         jpModificarCampoLayout.setVerticalGroup(
             jpModificarCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpModificarCampoLayout.createSequentialGroup()
-                .addGap(77, 77, 77)
+                .addGap(102, 102, 102)
                 .addComponent(jLabel11)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtModificarNombreCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(42, 42, 42)
                 .addComponent(jLabel12)
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbxModificarTipoCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(chkModificarObligatorio)
-                .addGap(35, 35, 35)
+                .addGap(33, 33, 33)
                 .addComponent(btnModificarCampo)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         jtpCampos.addTab("Modificar", jpModificarCampo);
@@ -1016,10 +1026,13 @@ public class GUI extends javax.swing.JFrame {
         }
         try {
             campoResultado = new TextField(nombrePendiente, opcionalPendiente, max, defecto);
-        } catch (IllegalArgumentException ex) {
+        }
+        //<editor-fold defaultstate="collapsed" desc="catch IO">
+        catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(DialogTexto, ex.getMessage());
             return;
         }
+            //</editor-fold>
         DialogTexto.setVisible(false);
     }//GEN-LAST:event_TextoAceptarActionPerformed
 
@@ -1061,7 +1074,7 @@ public class GUI extends javax.swing.JFrame {
         DialogBoolean.setVisible(false);
     }//GEN-LAST:event_BooleanoAceptarActionPerformed
 
-    private void btnCrearCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCampoActionPerformed
+    private void Btn_Def_ValoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Def_ValoresActionPerformed
         String nombre = validarNombre(txtCrearNombreCampo.getText(), -1);
         if (nombre == null) {
             return;
@@ -1073,7 +1086,7 @@ public class GUI extends javax.swing.JFrame {
         campos.add(nuevo);
         actualizarLista();
         txtCrearNombreCampo.setText("");
-    }//GEN-LAST:event_btnCrearCampoActionPerformed
+    }//GEN-LAST:event_Btn_Def_ValoresActionPerformed
 
     private void btnModificarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCampoActionPerformed
         int i = Lista_Campos.getSelectedIndex();
@@ -1309,6 +1322,7 @@ public class GUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> BooleandoTFCmbBox;
     private javax.swing.JButton BooleanoAceptar;
+    private javax.swing.JButton Btn_Def_Valores;
     private javax.swing.JPanel Dec;
     private javax.swing.JButton DecimalAceptar;
     private javax.swing.JSpinner DecimalPdDecimal;
@@ -1341,7 +1355,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarRegistro;
     private javax.swing.JToggleButton btnCampos;
     private javax.swing.JToggleButton btnCargarRegistros;
-    private javax.swing.JButton btnCrearCampo;
     private javax.swing.JButton btnEliminarCampo;
     private javax.swing.JToggleButton btnIntroducirRegistro;
     private javax.swing.JButton btnModificarCampo;
@@ -1374,6 +1387,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
