@@ -70,13 +70,9 @@ public class GUI extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         DialogDecimal = new javax.swing.JDialog();
         jLabel15 = new javax.swing.JLabel();
-        DecimalPdEntero = new javax.swing.JSpinner();
-        DecimalPdDecimal = new javax.swing.JSpinner();
         DecimaltxtField = new javax.swing.JTextField();
         DecimalAceptar = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
         DialogFecha = new javax.swing.JDialog();
         jLabel16 = new javax.swing.JLabel();
         FechaDiaSpinner = new javax.swing.JSpinner();
@@ -256,10 +252,6 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel23.setText("Valor por defecto:");
 
-        jLabel24.setText("Parte entera:");
-
-        jLabel25.setText("Parte decimal:");
-
         javax.swing.GroupLayout DialogDecimalLayout = new javax.swing.GroupLayout(DialogDecimal.getContentPane());
         DialogDecimal.getContentPane().setLayout(DialogDecimalLayout);
         DialogDecimalLayout.setHorizontalGroup(
@@ -273,26 +265,14 @@ public class GUI extends javax.swing.JFrame {
                             .addGroup(DialogDecimalLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(DialogDecimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                                     .addGroup(DialogDecimalLayout.createSequentialGroup()
-                                        .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))))
+                                        .addComponent(DecimaltxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)))))
                     .addGroup(DialogDecimalLayout.createSequentialGroup()
-                        .addGroup(DialogDecimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(DialogDecimalLayout.createSequentialGroup()
-                                .addGap(109, 109, 109)
-                                .addComponent(DecimalAceptar))
-                            .addGroup(DialogDecimalLayout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(DecimaltxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(DialogDecimalLayout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(DecimalPdEntero, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(DialogDecimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(DecimalPdDecimal, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(109, 109, 109)
+                        .addComponent(DecimalAceptar)
+                        .addGap(0, 89, Short.MAX_VALUE)))
                 .addGap(24, 24, 24))
         );
         DialogDecimalLayout.setVerticalGroup(
@@ -302,19 +282,11 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel23)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(DialogDecimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel24)
-                    .addComponent(jLabel25))
-                .addGap(7, 7, 7)
-                .addGroup(DialogDecimalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DecimalPdEntero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DecimalPdDecimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addComponent(DecimalAceptar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(DecimaltxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addGap(50, 50, 50)
+                .addComponent(DecimalAceptar)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         DialogFecha.setModal(true);
@@ -1094,6 +1066,8 @@ public class GUI extends javax.swing.JFrame {
             aviso("Seleccioná un campo de la lista");
             return;
         }
+        Field selected_field = campos.get(i);
+        changeDialogFields(selected_field);
         String nombre = validarNombre(txtModificarNombreCampo.getText(), i);
         if (nombre == null) {
             return;
@@ -1108,6 +1082,38 @@ public class GUI extends javax.swing.JFrame {
         Lista_Campos.setSelectedIndex(i);
     }//GEN-LAST:event_btnModificarCampoActionPerformed
 
+    private void changeDialogFields(Field field) {
+        if (field == null) {
+            this.EnteroJSpinner.setValue(0);
+            this.TextoSpinner.setValue(50);
+            this.TextotxtField.setText("");
+            this.DecimaltxtField.setText("");
+            this.FechaDiaSpinner.setValue(1);
+            this.FechaMesSpinner.setValue(1);
+            this.FechaAnioSpinner.setValue(2026);
+        }
+        else if (field instanceof IntField int_field) {
+            this.EnteroJSpinner.setValue(int_field.getDft_data());
+        }
+        else if (field instanceof TextField txt_field) {
+            this.TextoSpinner.setValue(txt_field.getMax_size());
+            this.TextotxtField.setText(txt_field.getDft_data());
+        }
+        else if (field instanceof DecimalField dec_field) {
+            this.DecimaltxtField.setText(
+                    Double.toString(dec_field.getDft_data())
+            );
+        }
+        else if (field instanceof DateField dt_field) {
+            this.FechaDiaSpinner.setValue(dt_field.getDay());
+            this.FechaMesSpinner.setValue(dt_field.getMonth());
+            this.FechaAnioSpinner.setValue(dt_field.getYear());
+        }
+        else if (field instanceof BoolField bool_field) {
+            this.BooleandoTFCmbBox.setSelectedIndex(bool_field.getDft_data());
+        }
+    }
+    
     private void btnEliminarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCampoActionPerformed
         int i = Lista_Campos.getSelectedIndex();
         if (i < 0) {
@@ -1261,8 +1267,6 @@ public class GUI extends javax.swing.JFrame {
     private void configurarSpinners() {
         EnteroJSpinner.setModel(new SpinnerNumberModel(0, Integer.MIN_VALUE, Integer.MAX_VALUE, 1));
         TextoSpinner.setModel(new SpinnerNumberModel(50, 1, 65535, 1));
-        DecimalPdEntero.setModel(new SpinnerNumberModel(10, 1, 18, 1));
-        DecimalPdDecimal.setModel(new SpinnerNumberModel(2, 0, 10, 1));
         FechaDiaSpinner.setModel(new SpinnerNumberModel(1, 1, 31, 1));
         FechaMesSpinner.setModel(new SpinnerNumberModel(1, 1, 12, 1));
         FechaAnioSpinner.setModel(new SpinnerNumberModel(2026, 1, 9999, 1));
@@ -1325,8 +1329,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton Btn_Def_Valores;
     private javax.swing.JPanel Dec;
     private javax.swing.JButton DecimalAceptar;
-    private javax.swing.JSpinner DecimalPdDecimal;
-    private javax.swing.JSpinner DecimalPdEntero;
     private javax.swing.JTextField DecimaltxtField;
     private javax.swing.JDialog DialogBoolean;
     private javax.swing.JDialog DialogDecimal;
@@ -1381,8 +1383,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;

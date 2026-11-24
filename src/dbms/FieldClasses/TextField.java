@@ -67,4 +67,12 @@ public class TextField extends Field {
         };
         
     }
+
+    public short getMax_size() {
+        return max_size;
+    }
+
+    public String getDft_data() {
+        return dft_data;
+    }
 }

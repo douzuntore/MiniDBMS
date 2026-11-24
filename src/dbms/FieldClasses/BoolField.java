@@ -50,5 +50,9 @@ public class BoolField extends Field {
         };
         
     }
+
+    public byte getDft_data() {
+        return dft_data;
+    }
     
 }

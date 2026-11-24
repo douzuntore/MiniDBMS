@@ -47,5 +47,9 @@ public class DecimalField extends Field {
         };
         
     }
+
+    public double getDft_data() {
+        return dft_data;
+    }
     
 }

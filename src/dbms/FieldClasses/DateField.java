@@ -32,13 +32,13 @@ public class DateField extends Field {
         if (month < 1 || month > 12) {
             throw new IllegalArgumentException("Mes fuera de rango");
         }
-        if (month <= 0 || month > Short.MAX_VALUE) {
+        if (month <= 0 || month > Short.MAX_VALUE - Short.MIN_VALUE) {
             throw new IllegalArgumentException("Mes fuera de rango");
         }
         
         this.day = day;
         this.month = month;
-        this.year = year;
+        this.year = (short)(year + Short.MIN_VALUE);
     }
     
     @Override
@@ -55,7 +55,7 @@ public class DateField extends Field {
         bb.put(getFieldType());
         bb.put(day);
         bb.put(month);
-        bb.putShort((short)(year + Short.MIN_VALUE));
+        bb.putShort(year);
         total_size += bb.capacity();
 
         ByteBuffer gen_data_bb = getGeneralData();
@@ -67,6 +67,18 @@ public class DateField extends Field {
                 bb.rewind()
         };
         
+    }
+
+    public byte getDay() {
+        return day;
+    }
+
+    public byte getMonth() {
+        return month;
+    }
+
+    public short getYear() {
+        return year;
     }
     
 }

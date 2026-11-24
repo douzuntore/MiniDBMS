@@ -49,4 +49,8 @@ public class IntField extends Field {
         };
         
     }
+
+    public int getDft_data() {
+        return dft_data;
+    }
 }
