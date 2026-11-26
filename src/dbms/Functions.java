@@ -52,6 +52,9 @@ public class Functions {
             }
             
         }
+        catch (Exception e) {
+            return false;
+        }
         return true;
     }
     

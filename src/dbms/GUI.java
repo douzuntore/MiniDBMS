@@ -10,6 +10,8 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
@@ -902,15 +904,24 @@ public class GUI extends javax.swing.JFrame {
 
     private void jmiAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAbrirActionPerformed
         
-        File_Chooser.setCurrentDirectory(new File("./"));
+        try {
+            File_Chooser.setCurrentDirectory(new File("./"));
         
-        if (File_Chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            
-            File f = File_Chooser.getSelectedFile();
-            
-            abrirArchivo(f);
+            if (File_Chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+
+                File f = File_Chooser.getSelectedFile();
+
+                abrirArchivo(f);
+                
+                ocultarPaneles();
+
+            }
+        }
+        catch (Exception e) {
             
         }
+        
+        
         actualizarBotones();
     }//GEN-LAST:event_jmiAbrirActionPerformed
 
@@ -965,9 +976,14 @@ public class GUI extends javax.swing.JFrame {
 
     private void JMICerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMICerrarActionPerformed
         
-        archivo_actual = null;
+        if (archivo_actual == null) {
+            aviso("No hay un archivo abierto");
+        }
+        else {
+            archivo_actual = null;
+            aviso("Archivo cerrado exitosamente");
+        }
         
-        aviso("Archivo cerrado exitosamente");
         this.txtArchivoActual.setText("");
         actualizarBotones();
         ocultarPaneles();
@@ -1201,7 +1217,15 @@ public class GUI extends javax.swing.JFrame {
             file_name = file_name.split("\\.")[0];
         }
         file = new File(file.getParent(), file_name + ".mtdt");
+        Path mtdt_file_path = file.toPath();
+        Path indx_file_path = new File(file.getParent(), file_name + ".indx").toPath();
+        Path dat_file_path = new File(file.getParent(), file_name + ".dat").toPath();
         //
+        
+        if (!Files.exists(mtdt_file_path) || !Files.exists(indx_file_path) || !Files.exists(dat_file_path)) {
+            txtArchivoActual.setText("[Archivo inválido!]");
+            return;
+        }
         
         campos.clear();
         
