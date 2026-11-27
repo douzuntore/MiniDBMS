@@ -8,8 +8,9 @@ package dbms.Arbol;
  *
  * @author starwalkerholiday
  */
-public class ArbolB {
+public class BTree {
     
-    
+    BNode root;
+    int 
     
 }
